@@ -1,0 +1,9 @@
+.navbar {
+    display: inline-flex;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+
+}
