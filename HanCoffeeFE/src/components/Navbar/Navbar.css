@@ -1,9 +1,147 @@
 .navbar {
-    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+
 }
 
-.navbar-menu {
+.navbar__logo {
+    height: 60px;
+}
+
+.navbar__menu {
+    /* gap: 20px; */
     list-style: none;
     display: flex;
+    text-transform: uppercase;
+}
 
+.navbar__menu>li>a {
+    padding: 16px;
+    font-size: 14px;
+}
+
+.navbar__menu>li>a:hover {
+    color: var(--primary-color);
+}
+
+.navbav__right {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+
+}
+
+.navbav__right-search {
+    height: 32px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    padding: 4px 16px;
+}
+
+.search__input {
+    outline: none;
+    border: none;
+    padding-right: 8px;
+}
+
+.search__history {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: var(--white-color);
+    box-shadow: 0 0 3px #b9b9b9;
+    border-radius: 2px;
+    overflow: hidden;
+    display: none;
+    font-size: 14px;
+    z-index: 1;
+}
+
+.search__history-heading {
+    color: #999;
+    margin-bottom: 12px;
+    font-weight: 500;
+    margin: 8px;
+
+}
+
+
+.search__history-item {
+    padding: 12px;
+}
+
+.search__history-item:hover {
+    background-color: #ccc;
+}
+
+.search__input:focus~.search__history {
+    display: block;
+}
+
+.search__icon {
+    padding: 4px;
+
+}
+
+.search__icon:hover {
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+
+.navbav__right-cart:hover,
+.navbav__right-user:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.navbav__right-cart {
+    position: relative;
+    padding: 22px;
+
+}
+
+.cart__icon {}
+
+.cart__number-product {
+    position: absolute;
+    background-color: var(--black-color);
+    border-radius: 10px;
+    padding: 0px 7px;
+    color: var(--white-color);
+    top: 12px;
+    right: 10px;
+    font-size: 12px;
+    border: 1px solid var(--white-color);
+}
+
+.navbav__right-user {
+    display: flex;
+    padding: 8px;
+    align-items: center;
+
+}
+
+.use__img {
+    border: 1px solid var(--primary-color);
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.user__name {
+    margin-left: 8px;
+    text-transform: capitalize;
+}
+
+.navbar__menu .active {
+    border-bottom: 2px solid var(--primary-color);
 }

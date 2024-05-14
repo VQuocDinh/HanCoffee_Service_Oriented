@@ -1,4 +1,30 @@
-import logo_branch from './hancoffee-logo.png'
+import logoBranch from './hancoffee-logo.png'
+import userImg from './user.png'
+import coffeeImg from './coffee.jpg'
 export const assets = {
-    logo_branch
+    logoBranch,
+    userImg
 }
+
+export const menu_list= [
+    {
+        menu_name: "Coffee",
+        menu_image: coffeeImg
+    },
+    {
+        menu_name: "Coffee",
+        menu_image: coffeeImg
+    },
+    {
+        menu_name: "Coffee",
+        menu_image: coffeeImg
+    },
+    {
+        menu_name: "Coffee",
+        menu_image: coffeeImg
+    },
+    {
+        menu_name: "Coffee",
+        menu_image: coffeeImg
+    }
+]

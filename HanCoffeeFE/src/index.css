@@ -1,7 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+:root {
+  --white-color: #fff;
+  --black-color: #000;
+  --text-color: #333;
+  --primary-color: #8B0305;
+  --border-color: #dbdbdb;
+  --hover-color: #fafafa;
+}
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: Outfit;
 }
 
 a {
@@ -11,4 +21,20 @@ a {
 
 body {
   min-height: 100vh;
+  height: 1000vh;
+
+}
+
+.app {
+  width: 70%;
+  margin: auto;
+
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  } to {
+      opacity: 1;
+  }
 }
