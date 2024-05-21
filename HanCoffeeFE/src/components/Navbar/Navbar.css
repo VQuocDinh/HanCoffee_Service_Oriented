@@ -1,9 +1,20 @@
 .navbar {
+    padding-top: 24px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    background-color: var(--white-color);
+
+}
+
+.navbar__wrap {
+    width: 70%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 16px;
-
+    margin: auto;
 }
 
 .navbar__logo {
@@ -105,7 +116,7 @@
 .navbav__right-cart {
     position: relative;
     padding: 22px;
-
+    margin: 0px 16px;
 }
 
 .cart__icon {}
@@ -124,7 +135,6 @@
 
 .navbav__right-user {
     display: flex;
-    padding: 8px;
     align-items: center;
 
 }
