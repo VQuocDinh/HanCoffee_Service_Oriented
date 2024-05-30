@@ -9,15 +9,13 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="sidebar-options">
-                <div
+                <NavLink
+                    to={PATH_DASHBOARD.general.product.list}
                     className="sidebar-option"
-                    onClick={() =>
-                        navigate(PATH_DASHBOARD.general.product.list)
-                    }
                 >
                     <img src={assets.list_icon} alt="" />
                     <p>Products</p>
-                </div>
+                </NavLink>
 
                 {/* <NavLink to={PATH_DASHBOARD.general.category.list} className="sidebar-option">
                     <img src={assets.list_icon} alt="" />
