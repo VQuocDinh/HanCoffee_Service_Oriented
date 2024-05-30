@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Navbar.css'
 import { assets } from '../../assets/assets'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
 const Navbar = () => {
     return (
         <div className="navbar">
