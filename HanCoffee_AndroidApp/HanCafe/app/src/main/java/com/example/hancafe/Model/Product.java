@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class Product implements Serializable, Parcelable {
     private String purl, name, describe, id, idCategory;
-    private int status, price;
+    private int status, price, quantity;
 
     public Product() {
     }
@@ -21,9 +21,10 @@ public class Product implements Serializable, Parcelable {
         this.id = id;
         this.status = status;
         this.price = price;
+
     }
 
-    public Product(String purl, String name, String describe, String id, int status, int price, String idCategory) {
+    public Product(String purl, String name, String describe, String id, int status, int price, String idCategory, int quantity) {
         this.purl = purl;
         this.name = name;
         this.describe = describe;
@@ -31,6 +32,7 @@ public class Product implements Serializable, Parcelable {
         this.status = status;
         this.price = price;
         this.idCategory = idCategory;
+        this.quantity = quantity;
     }
 
     protected Product(Parcel in) {
@@ -41,6 +43,7 @@ public class Product implements Serializable, Parcelable {
         idCategory = in.readString();
         status = in.readInt();
         price = in.readInt();
+        quantity = in.readInt();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -111,6 +114,14 @@ public class Product implements Serializable, Parcelable {
         this.idCategory = idCategory;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -125,5 +136,6 @@ public class Product implements Serializable, Parcelable {
         dest.writeInt(status);
         dest.writeInt(price);
         dest.writeString(idCategory);
+        dest.writeInt(quantity);
     }
 }

@@ -188,17 +188,58 @@ public class ProductDetail extends AppCompatActivity {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
         Intent intent = getIntent();
-        Product product = (Product) intent.getSerializableExtra("product");
 
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference("CartDetail");
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//        String idUser = "";
+//        if (currentUser != null) {
+//            idUser = currentUser.getUid();
+//        }
+
+        Product product = (Product) intent.getSerializableExtra("product");
+        if (product == null) {
+            Toast.makeText(this, "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Products").child(product.getId());
+        productRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String idUser = "";
-                if (currentUser != null) {
-                    idUser = currentUser.getUid();
+                Product fetchedProduct = snapshot.getValue(Product.class);
+                if (fetchedProduct != null) {
+                    if (fetchedProduct.getQuantity() > 0) {
+                        // Tiếp tục thêm sản phẩm vào giỏ hàng
+                        int quantityToBuy = Integer.parseInt(tvQuantity.getText().toString());
+                        processAddToCart(fetchedProduct, quantityToBuy);
+                    } else {
+                        // Hiển thị thông báo hết hàng
+                        showAlert(ProductDetail.this, "Thông báo", "Sản phẩm đã hết hàng.");
+                    }
+                } else {
+                    Toast.makeText(ProductDetail.this, "Lỗi: Không tìm thấy thông tin sản phẩm", Toast.LENGTH_SHORT).show();
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ProductDetail.this, "Lỗi: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+    }
+
+    private void processAddToCart(Product product, int quantityToBuy) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+        DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference("CartDetail");
+        DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Products").child(product.getId());
+        cartRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 int maxIdCartItem = 0;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     int idCartItem = dataSnapshot.child("idCartItem").getValue(Integer.class);
@@ -207,24 +248,31 @@ public class ProductDetail extends AppCompatActivity {
                     }
                 }
                 int newIdCartItem = maxIdCartItem + 1;
-                String idCart = idUser;
+                String idCart = currentUser.getUid();
                 String idProduct = product.getId();
                 int quantity = Integer.parseInt(tvQuantity.getText().toString());
-                CartDetail newItem = new CartDetail(newIdCartItem, idCart, idProduct, idSize, quantity);
-                myRef.push().setValue(newItem)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                showAlert(ProductDetail.this,"Thông báo", "Sản phẩm đã được thêm vào giỏ hàng");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ProductDetail.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
 
+                int newQuantity = product.getQuantity() - quantityToBuy;
+                if (newQuantity < 0) {
+                    showAlert(ProductDetail.this, "Thông báo", "Sản phẩm bạn đặt vượt quá số lượng tồn kho.");
+                } else {
+                    CartDetail newItem = new CartDetail(newIdCartItem, idCart, idProduct, idSize, quantity);
+                    cartRef.push().setValue(newItem)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    productRef.child("quantity").setValue(newQuantity)
+                                            .addOnSuccessListener(aVoid -> showAlert(ProductDetail.this, "Thông báo", "Sản phẩm đã được thêm vào giỏ hàng"))
+                                            .addOnFailureListener(e -> Toast.makeText(ProductDetail.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ProductDetail.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
             }
 
             @Override
@@ -232,8 +280,6 @@ public class ProductDetail extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void updateButtonState(Button clickedButton) {

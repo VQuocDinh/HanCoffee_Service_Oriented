@@ -65,6 +65,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.myViewHo
         holder.name.setText(model.getName());
         holder.price.setText(String.valueOf(model.getPrice()));
         holder.describe.setText(model.getDescribe());
+        holder.quantity.setText(String.valueOf(model.getQuantity()));
         Glide.with(holder.itemView.getContext())
                 .load(model.getPurl())
                 .placeholder(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark)
@@ -169,7 +170,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.myViewHo
 
     public class myViewHolder extends RecyclerView.ViewHolder{
         ImageView img;
-        TextView name,price,describe;
+        TextView name,price,describe, quantity;
 
         Button btnEdit,btnDelete;
 
@@ -180,6 +181,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.myViewHo
             name = (TextView) itemView.findViewById(R.id.nametext);
             price = (TextView) itemView.findViewById(R.id.pricetext);
             describe = (TextView) itemView.findViewById(R.id.describetext);
+            quantity = itemView.findViewById(R.id.tvQuantity);
 
             btnEdit = (Button) itemView.findViewById(R.id.btnEdit);
             btnDelete = (Button) itemView.findViewById(R.id.btnDelete);
