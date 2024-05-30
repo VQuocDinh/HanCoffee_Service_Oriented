@@ -1,11 +1,11 @@
 export const PATH_DASHBOARD = {
-    root: "/",
+    root: 'dashboard',
     general: {
         product: {
-            root: "/product",
-            add: "/product/add",
-            list: "/product/list",
-            edit: "/product/edit"
+            root: 'product',
+            add: 'product/add',
+            list: 'product/list',
+            edit: 'product/edit',
         },
         // category:{
         //     root: "/category",
@@ -15,17 +15,32 @@ export const PATH_DASHBOARD = {
 
         // },
         report: {
-            root: "/report",
-            list: "/report/list"
+            root: 'report',
+            list: 'report/list',
         },
         order: {
-            root: "/order",
-            list: "/order/list"
+            root: 'order',
+            list: 'order/list',
         },
         user: {
-            root: "/user",
-            add: "/user/add",
-            list: "/user/list"
-        }
-    }
+            root: 'user',
+            add: 'user/add',
+            list: 'user/list',
+        },
+    },
+}
+
+export const PATH_CUSTOMER = {
+    root: '/',
+    general: {
+        home: {
+            root: 'home',
+        },
+        cart: {
+            root: 'cart',
+        },
+        order: {
+            order: 'order',
+        },
+    },
 }

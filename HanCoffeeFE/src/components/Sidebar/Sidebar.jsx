@@ -9,27 +9,41 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="sidebar-options">
-                <NavLink to={PATH_DASHBOARD.general.product.list} className="sidebar-option">
+                <div
+                    className="sidebar-option"
+                    onClick={() =>
+                        navigate(PATH_DASHBOARD.general.product.list)
+                    }
+                >
                     <img src={assets.list_icon} alt="" />
                     <p>Products</p>
-                </NavLink>
+                </div>
 
                 {/* <NavLink to={PATH_DASHBOARD.general.category.list} className="sidebar-option">
                     <img src={assets.list_icon} alt="" />
                     <p>Category</p>
                 </NavLink> */}
 
-                <NavLink to={PATH_DASHBOARD.general.order.list} className="sidebar-option">
+                <NavLink
+                    to={PATH_DASHBOARD.general.order.list}
+                    className="sidebar-option"
+                >
                     <img src={assets.order_icon} alt="" />
                     <p>Orders</p>
                 </NavLink>
 
-                <NavLink to={PATH_DASHBOARD.general.report.list} className="sidebar-option">
+                <NavLink
+                    to={PATH_DASHBOARD.general.report.list}
+                    className="sidebar-option"
+                >
                     <img src={assets.report_icon} alt="" />
                     <p>Report</p>
                 </NavLink>
 
-                <NavLink to={PATH_DASHBOARD.general.user.list} className="sidebar-option">
+                <NavLink
+                    to={PATH_DASHBOARD.general.user.list}
+                    className="sidebar-option"
+                >
                     <img src={assets.user_icon} alt="" />
                     <p>Users</p>
                 </NavLink>

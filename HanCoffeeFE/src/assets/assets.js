@@ -11,6 +11,8 @@ import user_icon from './users.png';
 import view_icon from './view.png';
 import notification_icon from './notification.png';
 import delete_icon from './delete.png';
+import coffeeImg from './coffee.jpg';
+import userImg from './user.png'
 
 export const assets = {
     logo_branch,
@@ -25,5 +27,29 @@ export const assets = {
     user_icon,
     view_icon,
     notification_icon,
-    delete_icon
+    delete_icon,
+    userImg
 }
+
+export const menu_list= [
+    {
+        menu_name: "Coffee",
+        menu_image: coffeeImg
+    },
+    {
+        menu_name: "Coffee",
+        menu_image: coffeeImg
+    },
+    {
+        menu_name: "Coffee",
+        menu_image: coffeeImg
+    },
+    {
+        menu_name: "Coffee",
+        menu_image: coffeeImg
+    },
+    {
+        menu_name: "Coffee",
+        menu_image: coffeeImg
+    }
+]
