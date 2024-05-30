@@ -1,11 +1,19 @@
+function path(root, subLink) {
+    return `${root}${subLink}`
+}
+
+const ROOT_AUTH = '/auth'
+export const ROOT_DASHBOARD = '/dashboard'
+export const ROOT_CUSTOMER = '/'
+
 export const PATH_DASHBOARD = {
-    root: 'dashboard',
+    root: ROOT_DASHBOARD,
     general: {
         product: {
-            root: 'product',
-            add: 'product/add',
-            list: 'product/list',
-            edit: 'product/edit',
+            root: path(ROOT_DASHBOARD, '/product'),
+            add: path(ROOT_DASHBOARD, '/product/add'),
+            list: path(ROOT_DASHBOARD, '/product/list'),
+            edit: path(ROOT_DASHBOARD, '/product/edit/:productId'),
         },
         // category:{
         //     root: "/category",
@@ -15,32 +23,32 @@ export const PATH_DASHBOARD = {
 
         // },
         report: {
-            root: 'report',
-            list: 'report/list',
+            root: path(ROOT_DASHBOARD, '/report'),
+            list: path(ROOT_DASHBOARD, '/report/list'),
         },
         order: {
-            root: 'order',
-            list: 'order/list',
+            root: path(ROOT_DASHBOARD, '/order'),
+            list: path(ROOT_DASHBOARD, '/order/list'),
         },
         user: {
-            root: 'user',
-            add: 'user/add',
-            list: 'user/list',
+            root: path(ROOT_DASHBOARD, '/user'),
+            add: path(ROOT_DASHBOARD, '/user/add'),
+            list: path(ROOT_DASHBOARD, '/user/list'),
         },
     },
 }
 
 export const PATH_CUSTOMER = {
-    root: '/',
+    root: ROOT_CUSTOMER,
     general: {
         home: {
-            root: 'home',
+            root: path(ROOT_CUSTOMER, 'home'),
         },
         cart: {
-            root: 'cart',
+            root: path(ROOT_CUSTOMER, 'cart'),
         },
         order: {
-            order: 'order',
+            order: path(ROOT_CUSTOMER, '/order'),
         },
     },
 }

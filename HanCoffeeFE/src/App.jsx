@@ -1,10 +1,10 @@
-import { Outlet } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
+import Router from './common/routes/router'
 
 const App = () => {
     return (
         <div>
-            <Outlet />
+            <Router/>
         </div>
     )
 }
