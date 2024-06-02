@@ -1,17 +1,19 @@
-.add {
+.add-category{
     width: 70%;
-    margin-left: max(5vw, 25px);
+    margin-left: max(5vw,25px);
     margin-top: 50px;
     color: #6d6d6d;
     font-size: 16px;
 }
-.add form {
+
+
+.add-category form {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 600px;
+    max-width: 400px;
 }
 
 .flex-col {
@@ -21,10 +23,7 @@
 }
 
 .add-img-upload p,
-.add-product-name p,
-.add-product-description p,
-.add-category p,
-.add-price p {
+.add-product-name p {
     margin: 0 0 10px;
     font-weight: bold;
 }
@@ -46,40 +45,20 @@
     object-fit: cover;
 }
 
-.add-product-name input,
-.add-product-description textarea,
-.add-category select,
-.add-price input {
+.add-product-name input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.add-product-description textarea {
-    resize: vertical;
-}
-
-.add-category-price {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.add-category,
-.add-price {
-    flex: 1;
-}
-
 .add-btn {
-    padding: 8px 16px;
+    padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: 14px;
-    align-self: center;
 }
 
 .add-btn:hover {
@@ -87,7 +66,7 @@
 }
 
 @media (max-width: 600px) {
-    .add form {
+    .add-category form {
         padding: 15px;
     }
 
@@ -95,15 +74,8 @@
         max-width: 100%;
     }
 
-    .add-product-name input,
-    .add-product-description textarea,
-    .add-category select,
-    .add-price input {
+    .add-product-name input {
         padding: 8px;
-    }
-
-    .add-category-price {
-        flex-direction: column;
     }
 
     .add-btn {

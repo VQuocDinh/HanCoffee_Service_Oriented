@@ -81,6 +81,25 @@ export default function Router() {
                 {
                     children: [
                         {
+                            path: PATH_DASHBOARD.general.category.list,
+                            element: <CategoryListComponent />,
+                        },
+                        {
+                            path: PATH_DASHBOARD.general.category.add,
+                            element: <CategoryAddComponent />,
+                        },
+                        // {
+                        //     path: `${PATH_DASHBOARD.general.category.edit}/:categoryId`,
+                        //     element: <CategoryEditComponent />,
+                        // },
+                    ],
+                },
+
+                
+
+                {
+                    children: [
+                        {
                             path: PATH_DASHBOARD.general.report.list,
                             element: <Report />,
                         },
@@ -119,6 +138,17 @@ const ProductEditComponent = Loadable(
 )
 const ProductAddComponent = Loadable(
     lazy(() => import('../../pages/product/add'))
+)
+
+// Category
+const CategoryListComponent = Loadable(
+    lazy(() => import('../../pages/category/list'))
+)
+// const CategoryEditComponent = Loadable(
+//     lazy(() => import('../../pages/category/edit'))
+// )
+const CategoryAddComponent = Loadable(
+    lazy(() => import('../../pages/category/add'))
 )
 
 // User

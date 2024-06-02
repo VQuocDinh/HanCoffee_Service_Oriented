@@ -17,10 +17,13 @@ const Sidebar = () => {
                     <p>Products</p>
                 </NavLink>
 
-                {/* <NavLink to={PATH_DASHBOARD.general.category.list} className="sidebar-option">
+                <NavLink
+                    to={PATH_DASHBOARD.general.category.list}
+                    className="sidebar-option"
+                >
                     <img src={assets.list_icon} alt="" />
                     <p>Category</p>
-                </NavLink> */}
+                </NavLink>
 
                 <NavLink
                     to={PATH_DASHBOARD.general.order.list}

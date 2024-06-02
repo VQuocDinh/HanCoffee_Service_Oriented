@@ -15,13 +15,13 @@ export const PATH_DASHBOARD = {
             list: path(ROOT_DASHBOARD, '/product/list'),
             edit: path(ROOT_DASHBOARD, '/product/edit/:productId'),
         },
-        // category:{
-        //     root: "/category",
-        //     add: "/category/add",
-        //     list: "/category/list",
-        //     edit: "/category/edit"
-
-        // },
+        category:{
+            root: path(ROOT_DASHBOARD,'/category'),
+            add: path(ROOT_DASHBOARD,'/category/add'),
+            list: path(ROOT_DASHBOARD,'/category/list'),
+            edit: path(ROOT_DASHBOARD,'/category/edit/:categoryId'),
+            
+        },
         report: {
             root: path(ROOT_DASHBOARD, '/report'),
             list: path(ROOT_DASHBOARD, '/report/list'),
