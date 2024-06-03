@@ -17,7 +17,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-
+    width: 40%;
 }
 
 .product__detail-img {
@@ -86,7 +86,8 @@
     font-size: 20px;
     text-transform: uppercase;
     font-weight: 700;
-    box-shadow: 0 10px 24px #545454;
+    box-shadow: 0 0 20px #ccc;
+
 }
 
 .product__detail-content-buy-btn:hover {

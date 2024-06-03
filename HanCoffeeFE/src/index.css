@@ -32,16 +32,21 @@ body {
 .app {
   width: 70%;
   margin: auto;
+  padding-top: 150px;
   background-color: var(--white-color);
 
 }
 
 input {
-  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 2px;
   outline: none;
   
+}
+
+button {
+  border: none;
+  cursor: pointer;
 }
 
 @keyframes fadeIn {

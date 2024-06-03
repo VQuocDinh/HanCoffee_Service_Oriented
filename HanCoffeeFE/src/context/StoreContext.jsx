@@ -8,18 +8,30 @@ const StoreContextProvider = (props) => {
     const [category_list, setCategogryList] = useState([])
 
     const fetchProductList = async () => {
-        const productResponse = await axios.get(url + "/api/product/list")
-        setProductList(productResponse.data.data)
+        try {
+            const productResponse = await axios.get(`${url}/api/product/list`)
+            setProductList(productResponse.data.data)
+        } catch (error) {
+            console.error('Error fetching product list: ', error)
+        }
+
 
     }
 
-    const fetchCategoryList = async ()=> {
-        const categoryResponse = await axios.get(url + "/api/category/list")
+    const fetchCategoryList = async () => {
+        try {
+            const categoryResponse = await axios.get(`${url}/api/category/list`)
         setCategogryList(categoryResponse.data.data)
+        } catch (error) {
+            console.error('Error fetching category list: ', error)
+        }
+        
     }
+
     useEffect(() => {
         async function loadData() {
-            await fetchProductList();
+            await fetchProductList()
+            await fetchCategoryList()
         }
         loadData();
 

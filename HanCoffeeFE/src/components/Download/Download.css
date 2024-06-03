@@ -1,10 +1,10 @@
 .download {
     padding-top: 150px;
     display: flex;
-    flex-direction: row;
     gap: 20px;
     align-items: center;
     gap: 80px;
+    align-items: center;
 }
 
 .download__content {
@@ -40,4 +40,5 @@
 
 .download__img > img{
     width: 100%;
+
 }

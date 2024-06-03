@@ -1,7 +1,11 @@
 import React from 'react'
 import './Cart.css'
 import { assets } from '../../assets/assets'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
 const Cart = () => {
+  const navigate = useNavigate()
   return (
     <div className='cart'>
       <div className="cart__item">
@@ -22,7 +26,7 @@ const Cart = () => {
           <p>2</p>
           <p>M</p>
           <p>$4</p>
-          <p>X</p>
+          <p><FontAwesomeIcon icon={faTrash} /></p>
         </div>
         <hr />
 
@@ -33,7 +37,7 @@ const Cart = () => {
           <p>2</p>
           <p>M</p>
           <p>$4</p>
-          <p>X</p>
+          <p><FontAwesomeIcon icon={faTrash} /></p>
         </div>
         <hr />
 
@@ -44,7 +48,7 @@ const Cart = () => {
           <p>2</p>
           <p>M</p>
           <p>$4</p>
-          <p>X</p>
+          <p><FontAwesomeIcon icon={faTrash} /></p>
         </div>
         <hr />
       </div>
@@ -63,7 +67,7 @@ const Cart = () => {
             <span>$4</span>
           </div>
 
-          <button className="cart__bottom-order-btn">Order</button>
+          <button onClick={() => navigate('/pay')} className="cart__bottom-order-btn">Order</button>
 
         </div>
 

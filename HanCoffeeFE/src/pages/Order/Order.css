@@ -25,6 +25,11 @@
 
 }
 
+.order__left-delivery-type>input {
+    padding: 8px;
+
+
+}
 
 
 .order__left-pay {}
@@ -50,7 +55,7 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    box-shadow: 0 0 24px #ccc;
+    box-shadow: 0 0 20px #ccc;
     border-radius: 2px;
 
 }

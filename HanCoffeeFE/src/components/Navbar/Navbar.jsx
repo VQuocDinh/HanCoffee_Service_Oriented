@@ -3,7 +3,7 @@ import './Navbar.css'
 import { assets } from '../../assets/assets'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -13,8 +13,8 @@ const Navbar = () => {
     <div className='navbar'>
       <div className="navbar__wrap">
 
-        <div className="navbar__logo">
-          <Link to={'/'}><img src={assets.logoBranch} alt="logo" className="logo-branch" /> </Link>
+        <div onClick={() => navigate('/')} className="navbar__logo">
+          <img src={assets.logoBranch} alt="logo" className="logo-branch" />
         </div>
 
         <ul className="navbar__menu">
@@ -50,7 +50,8 @@ const Navbar = () => {
               <FontAwesomeIcon icon={faSearch} />
             </i>
           </div>
-          <div onClick={()=> navigate('/cart')} className="navbav__right-cart">
+
+          <div onClick={() => navigate('/cart')} className="navbav__right-cart">
             <i className='cart__icon'>
               <FontAwesomeIcon icon={faCartShopping} />
             </i>
@@ -58,11 +59,32 @@ const Navbar = () => {
           </div>
 
           <div className="navbav__right-user">
-            <img src={assets.userImg} alt="" className="use__img" />
+            <img src={assets.userImg} alt="" className="user__img" />
             <span className="user__name">quốc dinh</span>
+            <div className="user__select">
+              <ul className='user__select-list'>
+                <li onClick={()=> navigate('/user')} className='user__select-item'>Tài khoản của tôi</li>
+                <li className='user__select-item'>Đơn mua</li>
+                <li className='user__select-item'>Đăng xuất</li>
+              </ul>
+            </div>
           </div>
+
+          {/* <div className="navbav__right-user-not-active">s
+            <img src={assets.userImg} alt="" className="user__img" />
+            <span className="user__name">Đăng nhập</span>
+            <div className="user__select">
+              <ul className='user__select-list'>
+                <li className='user__select-item'>Tài khoản của tôi</li>
+                <li className='user__select-item'>Đơn mua</li>
+                <li className='user__select-item'>Đăng xuất</li>
+              </ul>
+            </div>
+          </div> */}
         </div>
       </div>
+
+    
     </div>
   )
 }

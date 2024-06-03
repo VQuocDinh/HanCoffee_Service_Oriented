@@ -3,6 +3,7 @@ import cors from 'cors'
 import { connectDB } from './config/db.js'
 import productRouter from './routers/productRouter.js'
 import categoryRouter from './routers/categoryRouter.js'
+import cartItemsRouter from './routers/cartItemsRouter.js'
 
 // app connfig
 const app = express()
@@ -18,6 +19,7 @@ connectDB();
 // api endpoints
 app.use("/api/product", productRouter)
 app.use("/api/category", categoryRouter)
+app.use("/api/cartItem", cartItemsRouter)
 app.use("/images", express.static('uploads'))
 
 

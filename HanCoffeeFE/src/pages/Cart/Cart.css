@@ -20,6 +20,12 @@
     color: #666;
     align-items: center;
     margin: 8px 0;
+    cursor: pointer;
+
+}
+
+.cart__items-item:hover{
+  color: black;
 }
 
 .cart__items-item-img{

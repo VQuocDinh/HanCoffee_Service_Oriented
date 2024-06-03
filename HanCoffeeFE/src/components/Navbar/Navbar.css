@@ -19,6 +19,7 @@
 
 .navbar__logo {
     height: 60px;
+    cursor: pointer;
 }
 
 .navbar__menu {
@@ -107,8 +108,7 @@
 }
 
 
-.navbav__right-cart:hover,
-.navbav__right-user:hover {
+.navbav__right-cart:hover {
     color: var(--primary-color);
     cursor: pointer;
 }
@@ -117,6 +117,12 @@
     position: relative;
     padding: 22px;
     margin: 0px 16px;
+}
+
+.navbav__right-cart:hover >span {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+
 }
 
 .cart__icon {}
@@ -134,12 +140,16 @@
 }
 
 .navbav__right-user {
+    position: relative;
     display: flex;
     align-items: center;
-
 }
 
-.use__img {
+.navbav__right-user:hover > .user__select {
+    display: block;
+}
+
+.user__img {
     border: 1px solid var(--primary-color);
     height: 32px;
     width: 32px;
@@ -154,4 +164,49 @@
 
 .navbar__menu .active {
     border-bottom: 2px solid var(--primary-color);
+}
+
+.active {
+    display: block;
+}
+
+.navbav__right-user .user__select {
+    display: none;
+    position: absolute;
+    box-shadow: 0 0 20px #ccc;
+    border-radius: 2px;
+    padding: 8px;
+    width: 200px;
+    z-index: 1;
+    background-color: var(--white-color);
+    left: -76px;
+    top: 38px;
+}
+
+.user__select:before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-width: 20px 25px;
+    border-style: solid;
+    border-color: transparent transparent var(--white-color) transparent;
+    top: -30px;
+    right: 36px;
+}
+
+.user__select-item {
+    list-style: none;
+    padding: 8px;
+    font-size: 14px;
+    
+}
+
+.user__select-item:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+
+}
+.navbav__right-user-not-active {
+    display: none;
+
 }
