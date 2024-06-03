@@ -1,12 +1,22 @@
 import logoBranch from './hancoffee-logo.png'
 import userImg from './user.png'
-import coffeeImg from './coffee.jpg'
+import coffeeImg from './category.png'
+import productImg from './juice.jpg'
+import downloadLink from './downloadApp.png'
+import instagramLogo from './instagram.png'
+import facebookLogo from './facebook.png'
+import androidImg from './android-app.png'
 export const assets = {
     logoBranch,
-    userImg
+    userImg,
+    productImg,
+    downloadLink,
+    instagramLogo,
+    facebookLogo,
+    androidImg
 }
 
-export const menu_list= [
+export const menu_list = [
     {
         menu_name: "Coffee",
         menu_image: coffeeImg
@@ -26,5 +36,58 @@ export const menu_list= [
     {
         menu_name: "Coffee",
         menu_image: coffeeImg
+    }
+]
+
+export const product_list = [
+    {
+        id: "1",
+        name: "Capuchino",
+        desc: "Capuchino là một loại cà phê gồm có cà phê và lớp bọt sữa (được đánh bông nằm ở phía trên), cùng với một ít bột ca cao hoặc bột quế được rắc lên bề mặt thức uống trước khi phục vụ.",
+        category: "1",
+        price: 2,
+        image: productImg,
+        status: 0,
+    },
+    {
+        id: "2",
+        name: "Capuchino",
+        desc: "Capuchino là một loại cà phê gồm có cà phê và lớp bọt sữa (được đánh bông nằm ở phía trên), cùng với một ít bột ca cao hoặc bột quế được rắc lên bề mặt thức uống trước khi phục vụ.",
+        category: "1",
+        price: 2,
+        image: productImg,
+        status: 0,
+    },{
+        id: "3",
+        name: "Capuchino",
+        desc: "Capuchino là một loại cà phê gồm có cà phê và lớp bọt sữa (được đánh bông nằm ở phía trên), cùng với một ít bột ca cao hoặc bột quế được rắc lên bề mặt thức uống trước khi phục vụ.",
+        category: "1",
+        price: 2,
+        image: productImg,
+        status: 0,
+    },{
+        id: "4",
+        name: "Capuchino",
+        desc: "Capuchino là một loại cà phê gồm có cà phê và lớp bọt sữa (được đánh bông nằm ở phía trên), cùng với một ít bột ca cao hoặc bột quế được rắc lên bề mặt thức uống trước khi phục vụ.",
+        category: "1",
+        price: 2,
+        image: productImg,
+        status: 0,
+    },{
+        id: "5",
+        name: "Capuchino",
+        desc: "Capuchino là một loại cà phê gồm có cà phê và lớp bọt sữa (được đánh bông nằm ở phía trên), cùng với một ít bột ca cao hoặc bột quế được rắc lên bề mặt thức uống trước khi phục vụ.",
+        category: "1",
+        price: 2,
+        image: productImg,
+        status: 0,
+    },{
+        id: "6",
+        name: "Capuchino",
+        desc: "Capuchino là một loại cà phê gồm có cà phê và lớp bọt sữa (được đánh bông nằm ở phía trên), cùng với một ít bột ca cao hoặc bột quế được rắc lên bề mặt thức uống trước khi phục vụ.",
+        category: "1",
+        price: 2,
+        image: productImg,
+        status: 0,
     }
 ]
