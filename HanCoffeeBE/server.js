@@ -6,7 +6,10 @@ import userRouter from './routes/userRoute.js'
 import cartRouter from './routes/cartRoute.js'
 import 'dotenv/config'
 import categoryRouter from './routes/categoryRoute.js'
-// import orderRouter from './routes/orderRoute.js'
+import productRouter from './routers/productRouter.js'
+import categoryRouter from './routers/categoryRouter.js'
+import cartItemsRouter from './routers/cartItemsRouter.js'
+
 // app connfig
 const app = express()
 const port = 8888
@@ -20,14 +23,16 @@ connectDB();
 
 //api endpoints
 app.use("/api/product",productRouter)
-app.use("/images",express.static('uploads'))
 app.use("/api/user",userRouter)
 app.use("/api/cart",cartRouter)
 app.use("/api/category",categoryRouter)
-// app.use("/api/order",orderRouter)
+app.use("/api/cartItem", cartItemsRouter)
+app.use("/images", express.static('uploads'))
+
+
 // app router
 app.get("/", (req,res)=> {
-    res.send("API")
+    res.send("Initial Success")
 })
 
 app.listen(port,()=>{
