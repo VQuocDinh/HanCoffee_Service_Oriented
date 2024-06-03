@@ -1,12 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-:root {
-  --white-color: #fff;
-  --black-color: #000;
-  --text-color: #333;
-  --primary-color: #8B0305;
-  --border-color: #dbdbdb;
-  --hover-color: #fafafa;
-}
 *{
   padding: 0;
   margin: 0;
@@ -26,6 +18,25 @@ a {
 
 body {
   min-height: 100vh;
+}
+
+hr{
+  border: none;
+  height: 1px;
+  background-color: #a9a9a9;
+}
+.app-content{
+  display:flex ;
+}
+
+.flex-col{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cursor{
+  cursor: pointer;
 
 }
 
