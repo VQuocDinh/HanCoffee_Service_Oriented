@@ -1,5 +1,5 @@
 import express from 'express';
-import {productList, addProduct,listProducts,removeProduct } from '../controllers/productController.js';
+import { addProduct,listProducts,removeProduct } from '../controllers/productController.js';
 import multer from "multer";
 
 const productRouter = express.Router();
