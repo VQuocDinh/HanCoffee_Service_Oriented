@@ -39,10 +39,19 @@ const removeFromCart = async(req,res) => {
 }
 
 //fetch user cart data
-const getCart = async(req,res) => {
-
+const fetchAllCartItems = async(req,res) => {
+    try {
+        const cartItems = await cartItemsModel.find({});
+        if (cartItems.length === 0) {
+            return res.json({ success: true, message: "No items in the cart" });
+          }
+        res.json({success:true, data:cartItems})
+    } catch (error) {
+        console.log(error);
+        res.json({success:false, message:"Error"})
+    }
 }
 
-export { addToCart, removeFromCart, getCart }
+export { addToCart, removeFromCart, fetchAllCartItems }
 
 

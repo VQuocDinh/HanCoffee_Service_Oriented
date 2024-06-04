@@ -21,7 +21,6 @@ connectDB();
 //api endpoints
 app.use("/api/product",productRouter)
 app.use("/api/user",userRouter)
-app.use("/api/cartItems",cartItemsRouter)
 app.use("/api/category",categoryRouter)
 app.use("/api/cartItem", cartItemsRouter)
 app.use("/images", express.static('uploads'))
