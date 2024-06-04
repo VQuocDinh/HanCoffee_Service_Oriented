@@ -1,5 +1,9 @@
 import express from 'express'
-import { addToCart } from '../controllers/cartIitemsController.js'
+import authMiddleware from '../middleware/auth.js';
+import { addToCart, removeFromCart, getCart } from '../controllers/cartIitemsController.js'
 const cartItemsRouter = express.Router()
-cartItemsRouter.post("/add", addToCart)
-export default cartItemsRouter
+cartItemsRouter.post("/add",authMiddleware,addToCart)
+cartItemsRouter.post("/remove",authMiddleware,removeFromCart)
+cartItemsRouter.post("/get",authMiddleware,getCart)
+
+export default cartItemsRouter;

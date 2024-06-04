@@ -17,7 +17,6 @@ const upload = multer({storage:storage})
 productRouter.post("/add",upload.single("image"), addProduct)
 productRouter.get("/list",listProducts)
 productRouter.post("/remove",removeProduct)
-productRouter.get("/list", productList)
 
 
 export default productRouter;
