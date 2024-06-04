@@ -2,7 +2,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Router from './common/routes/router'
 
 import { Route, Routes } from 'react-router-dom'
-import Navbar from './components/Navbar/Navbar'
+import Navbar from './components/Navbar/customer/NavbarCustomer'
 import Home from './pages/Home/Home'
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'

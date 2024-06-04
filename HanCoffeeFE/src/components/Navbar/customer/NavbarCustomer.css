@@ -1,4 +1,4 @@
-.navbar {
+.navbar__customer {
     padding-top: 24px;
     position: fixed;
     top: 0;
@@ -8,7 +8,7 @@
     background-color: var(--white-color);
 
 }
-
+ 
 .navbar__wrap {
     width: 70%;
     display: flex;

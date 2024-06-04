@@ -30,7 +30,6 @@ const listCategories = async(req, res) =>{
     }
 }
 
-export {addCategory, listCategories}
 
 // fetch all category
 const categoryList = async (req,res)=>{
@@ -44,4 +43,4 @@ const categoryList = async (req,res)=>{
     }
 }
 
-export {categoryList}
+export {categoryList, addCategory, listCategories}

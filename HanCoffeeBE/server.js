@@ -6,8 +6,6 @@ import userRouter from './routes/userRoute.js'
 import cartRouter from './routes/cartRoute.js'
 import 'dotenv/config'
 import categoryRouter from './routes/categoryRoute.js'
-import productRouter from './routers/productRouter.js'
-import categoryRouter from './routers/categoryRouter.js'
 import cartItemsRouter from './routers/cartItemsRouter.js'
 
 // app connfig

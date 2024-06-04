@@ -1,18 +1,11 @@
-import logo_branch from './hancoffee-logo.png';
-import background_image from "../assets/background.png"
-import profile_image from './profile_image.png';
-import add_icon from './add_icon.png';
-import list_icon from './list_icon.png';
-import report_icon from './report.png';
-import order_icon from './order.png';
-import upload_area from './upload-area.png';
-import edit_icon from './edit.png';
-import user_icon from './users.png';
-import view_icon from './view.png';
-import notification_icon from './notification.png';
-import delete_icon from './delete.png';
 import coffeeImg from './coffee.jpg';
 import userImg from './user.png'
+import logoBranch from './hancoffee-logo.png'
+import productImg from './juice.jpg'
+import downloadLink from './downloadApp.png'
+import instagramLogo from './instagram.png'
+import facebookLogo from './facebook.png'
+import androidImg from './android-app.png'
 
 export const assets = {
     logoBranch,

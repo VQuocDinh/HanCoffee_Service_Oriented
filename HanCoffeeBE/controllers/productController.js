@@ -75,7 +75,6 @@ const editProduct = async (req, res) => {
     }
 };
 
-export {addProduct,listProducts,editProduct,removeProduct}
 
 //fetch all product
 const productList = async (req,res) => {
@@ -87,5 +86,5 @@ const productList = async (req,res) => {
         res.json({success:false,message:"Error"})
     }
 }
+export {productList, addProduct,listProducts,editProduct,removeProduct}
 
-export {productList}
