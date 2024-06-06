@@ -113,14 +113,18 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
         public void onBindViewHolder(@NonNull ChildViewHolder holder, int position) {
             OrderDetail orderDetail = orderDetails.get(position);
             holder.tvNameProduct.setText(orderDetail.getNameProduct());
-            holder.tvPriceProduct.setText(String.valueOf(orderDetail.getPriceProduct()));
             holder.tvQuantity.setText(String.valueOf(orderDetail.getQuantity()));
+
+            int price = orderDetail.getPriceProduct();
             if (orderDetail.getIdSize() == 0) {
                 holder.tvSize.setText("S");
+                holder.tvPriceProduct.setText(String.valueOf(price));
             } else if (orderDetail.getIdSize() == 1) {
                 holder.tvSize.setText("M");
+                holder.tvPriceProduct.setText(String.valueOf(price * 1.25));
             } else {
                 holder.tvSize.setText("L");
+                holder.tvPriceProduct.setText(String.valueOf(price * 1.5));
             }
             Glide.with(holder.itemView.getContext())
                     .load(orderDetail.getImgProduct())

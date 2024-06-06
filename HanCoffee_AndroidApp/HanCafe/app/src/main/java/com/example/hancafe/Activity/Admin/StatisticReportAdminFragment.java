@@ -2,10 +2,19 @@ package com.example.hancafe.Activity.Admin;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +29,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+
+import com.example.hancafe.Model.Product;
 import com.example.hancafe.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -44,6 +60,7 @@ import org.eazegraph.lib.models.PieModel;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -54,10 +71,16 @@ import com.example.hancafe.Activity.Adapter.CTHDAdapter;
 import com.example.hancafe.Model.CTHD;
 
 
+import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
 
 
 public class StatisticReportAdminFragment extends Fragment {
@@ -65,9 +88,9 @@ public class StatisticReportAdminFragment extends Fragment {
     List<String> data_listTime = new ArrayList<>();
     ArrayAdapter<String> adapter_listTime;
     DatePickerDialog datePickerDialog;
-    Button dateButton, btnExportPDF;
+    Button dateButton, btnExportPDF, btnExport;
     BarDataSet dataSet;
-    LinearLayout chartLayout, lengend_layout;
+    LinearLayout chartLayout, lengend_layout, lnExportPdf;
     CardView cardViewChart;
     CardView cvDetails;
     TextView  tvtotal, tvtitleDay, tvtitle ;
@@ -76,11 +99,13 @@ public class StatisticReportAdminFragment extends Fragment {
     LinearLayout thongke;
     CTHDAdapter CTHDAdapter;
     List<CTHD> listCTHD;
+    public final static int REQUEST_CODE = 1232;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_statistic_report, container, false);
+        askPermissions();
         setControl(view);
         initLayoutManager();
         createSampleData();
@@ -90,8 +115,9 @@ public class StatisticReportAdminFragment extends Fragment {
         return view;
     }
 
-
-
+    private void askPermissions() {
+        ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
+    }
 
 
     private void setControl(View view) {
@@ -108,6 +134,8 @@ public class StatisticReportAdminFragment extends Fragment {
         tvtitle = view.findViewById(R.id.tvtitle);
         thongke = view.findViewById(R.id.thongke);
         btnExportPDF = view.findViewById(R.id.btnExportPDF);
+        btnExport = view.findViewById(R.id.btnExport);
+        lnExportPdf = view.findViewById(R.id.lnExportPdf);
     }
 
     private void initLayoutManager() {
@@ -169,10 +197,18 @@ public class StatisticReportAdminFragment extends Fragment {
                                 SetDataPieChart( totalAmount[0], listCTHD);
                                 CTHDAdapter.notifyDataSetChanged();
                                 tvtitleDay.setText("Thống kê các sản phẩm đã bán trong ngày:");
+
                                 btnExportPDF.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        exportToPDF( selectedDate, listCTHD, totalAmount[0]);
+//                                        exportToPDF( selectedDate, listCTHD, totalAmount[0]);
+                                    }
+                                });
+
+                                btnExport.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        convertXMLtoPDF(selectedDate, listCTHD, totalAmount[0]);
                                     }
                                 });
                             }
@@ -199,6 +235,74 @@ public class StatisticReportAdminFragment extends Fragment {
         });
     }
 
+    private void convertXMLtoPDF(String selectedDate, List<CTHD> listCTHD, int totalAmount) {
+        // Kiểm tra xem danh sách sản phẩm có rỗng không
+        if (listCTHD.isEmpty()) {
+            Toast.makeText(getContext(), "Không có doanh thu trong ngày", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Kiểm tra và yêu cầu quyền WRITE_EXTERNAL_STORAGE nếu cần
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
+            return;
+        }
+
+        // Tạo tên tệp dựa trên ngày được chọn
+        String formatDate = selectedDate.replace("/", "-");
+        File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        String fileName = "Report_" + formatDate + ".pdf";
+        File filePath = new File(downloadsDir, fileName);
+
+        // Tạo một đối tượng PdfWriter và bắt đầu viết vào tệp PDF
+        PdfWriter writer;
+        try {
+            writer = new PdfWriter(new FileOutputStream(filePath));
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+
+            // Thêm tiêu đề
+            document.add(new Paragraph("Report Static In Day: " + selectedDate));
+
+            // Tạo bảng để chứa dữ liệu
+            Table table = new Table(3); // 3 cột: Tên sản phẩm, Số lượng, Tổng tiền
+
+            Cell cell1 = new Cell().add(new Paragraph("Product Name"));
+            cell1.setPadding(5); // Đặt khoảng cách (padding) cho ô
+            Cell cell2 = new Cell().add(new Paragraph("Quantity"));
+            cell2.setPadding(5);
+            Cell cell3 = new Cell().add(new Paragraph("Total"));
+            cell3.setPadding(5);
+            // Thêm tiêu đề cho bảng
+            table.addCell(cell1);
+            table.addCell(cell2);
+            table.addCell(cell3);
+
+            // Thêm dữ liệu từ danh sách sản phẩm
+            for (CTHD cthd : listCTHD) {
+                table.addCell(new Cell().add(new Paragraph(cthd.getNameProduct())));
+                table.addCell(new Cell().add(new Paragraph(String.valueOf(cthd.getQuantity()))));
+                table.addCell(new Cell().add(new Paragraph(String.valueOf(cthd.getPriceProduct()))));
+            }
+
+            // Thêm bảng vào tài liệu
+            document.add(table);
+
+            // Thêm tổng doanh thu
+            document.add(new Paragraph("Tổng doanh thu sau khuyến mãi: " + totalAmount));
+
+            // Đóng tài liệu
+            document.close();
+
+            // Hiển thị thông báo thành công
+            Toast.makeText(getContext(), "Xuất file PDF thành công", Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Lỗi khi tạo file PDF", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private String getTodaysDate() {
         Calendar cal = Calendar.getInstance();
@@ -483,50 +587,50 @@ public class StatisticReportAdminFragment extends Fragment {
     private void clearChart() {
         chartLayout.removeAllViews();
     }
-    private void exportToPDF( String selectedDate, List<CTHD> listCTHD, int totalAmount) {
-        if (listCTHD.isEmpty()) {
-            Toast.makeText(getContext(), "Không có doanh thu trong ngày", Toast.LENGTH_SHORT).show();
-            return; // Kết thúc phương thức nếu danh sách rỗng
-        }
-        // Kiểm tra xem thiết bị có hỗ trợ ghi file không
-        if (isExternalStorageWritable()) {
-            String formatDate =  selectedDate.replace("/", "-");
-            File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            String fileName = "report_"+ formatDate +".pdf";
-            File f = new File(file, fileName);
-            PdfWriter writer;
-            try {
-                writer = new PdfWriter(new FileOutputStream(f));
-                PdfDocument pdf = new PdfDocument(writer);
-                Document document = new Document(pdf);
-
-                // Thêm tiêu đề
-                document.add(new Paragraph("Report Static In Day: " + selectedDate));
-
-                // Thêm danh sách các sản phẩm và thông tin liên quan
-                for (CTHD cthd : listCTHD) {
-                    document.add(new Paragraph("Product Name: " + cthd.getNameProduct()));
-                    document.add(new Paragraph("Quantity: " + cthd.getQuantity()));
-                    document.add(new Paragraph("Total: " + cthd.getPriceProduct()));
-                    document.add(new Paragraph("--------------------------------------"));
-                }
-
-                // Thêm tổng doanh thu
-                document.add(new Paragraph("Total Amount after promotion: " + totalAmount));
-
-                // Đóng tài liệu
-                document.close();
-                ;
-                // Hiển thị thông báo thành công
-                Toast.makeText(getContext(), "Xuất file PDF thành công", Toast.LENGTH_SHORT).show();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                Toast.makeText(getContext(), "Lỗi khi tạo file PDF", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(getContext(), "Thiết bị không hỗ trợ ghi file", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void exportToPDF( String selectedDate, List<CTHD> listCTHD, int totalAmount) {
+//        if (listCTHD.isEmpty()) {
+//            Toast.makeText(getContext(), "Không có doanh thu trong ngày", Toast.LENGTH_SHORT).show();
+//            return; // Kết thúc phương thức nếu danh sách rỗng
+//        }
+//        // Kiểm tra xem thiết bị có hỗ trợ ghi file không
+//        if (isExternalStorageWritable()) {
+//            String formatDate =  selectedDate.replace("/", "-");
+//            File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+//            String fileName = "report_"+ formatDate +".pdf";
+//            File f = new File(file, fileName);
+//            PdfWriter writer;
+//            try {
+//                writer = new PdfWriter(new FileOutputStream(f));
+//                PdfDocument pdf = new PdfDocument(writer);
+//                Document document = new Document(pdf);
+//
+//                // Thêm tiêu đề
+//                document.add(new Paragraph("Report Static In Day: " + selectedDate));
+//
+//                // Thêm danh sách các sản phẩm và thông tin liên quan
+//                for (CTHD cthd : listCTHD) {
+//                    document.add(new Paragraph("Product Name: " + cthd.getNameProduct()));
+//                    document.add(new Paragraph("Quantity: " + cthd.getQuantity()));
+//                    document.add(new Paragraph("Total: " + cthd.getPriceProduct()));
+//                    document.add(new Paragraph("--------------------------------------"));
+//                }
+//
+//                // Thêm tổng doanh thu
+//                document.add(new Paragraph("Total Amount after promotion: " + totalAmount));
+//
+//                // Đóng tài liệu
+//                document.close();
+//                ;
+//                // Hiển thị thông báo thành công
+//                Toast.makeText(getContext(), "Xuất file PDF thành công", Toast.LENGTH_SHORT).show();
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//                Toast.makeText(getContext(), "Lỗi khi tạo file PDF", Toast.LENGTH_SHORT).show();
+//            }
+//        } else {
+//            Toast.makeText(getContext(), "Thiết bị không hỗ trợ ghi file", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     // Kiểm tra xem thiết bị có hỗ trợ ghi file không
     private boolean isExternalStorageWritable() {

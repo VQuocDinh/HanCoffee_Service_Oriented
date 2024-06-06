@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,13 +65,18 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
 
         int price = cartItem.getQuantity() * cartItem.getProductPrice();
         if (cartItem.getSizeId() == 0) {
+            int originalPrice = price;
             holder.tvSize.setText("S");
+            holder.tvPriceProduct.setText(String.valueOf(originalPrice));
         } else if (cartItem.getSizeId() == 1) {
+            int originalPrice = (int) (price * 1.25);
             holder.tvSize.setText("M");
+            holder.tvPriceProduct.setText(String.valueOf(originalPrice));
         } else {
+            int originalPrice = (int) (price * 1.5);
             holder.tvSize.setText("L");
+            holder.tvPriceProduct.setText(String.valueOf(originalPrice));
         }
-        holder.tvPriceProduct.setText(String.valueOf(price));
 
         holder.btnDelFromCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,11 +95,39 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
                                             dataSnapshot.getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
-                                                    int position = holder.getAdapterPosition();
-                                                    if (position != RecyclerView.NO_POSITION) {
-                                                        data.remove(position);
-                                                    }
-                                                    notifyDataSetChanged();
+                                                    // Cập nhật số lượng sản phẩm trong kho
+                                                    DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Products").child(cartItem.getProductId());
+                                                    productRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                            if (snapshot.exists()) {
+                                                                int currentQuantity = snapshot.child("quantity").getValue(Integer.class);
+                                                                int newQuantity = currentQuantity + cartItem.getQuantity();
+                                                                productRef.child("quantity").setValue(newQuantity).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void unused) {
+                                                                        int position = holder.getAdapterPosition();
+                                                                        if (position != RecyclerView.NO_POSITION) {
+                                                                            data.remove(position);
+                                                                        }
+                                                                        notifyDataSetChanged();
+                                                                    }
+                                                                }).addOnFailureListener(new OnFailureListener() {
+                                                                    @Override
+                                                                    public void onFailure(@NonNull Exception e) {
+                                                                        // Xử lý lỗi nếu cập nhật số lượng sản phẩm thất bại
+                                                                        Toast.makeText(v.getContext(), "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                });
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+                                                            // Xử lý lỗi nếu truy vấn sản phẩm thất bại
+                                                            Toast.makeText(v.getContext(), "Lỗi: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                                 @Override

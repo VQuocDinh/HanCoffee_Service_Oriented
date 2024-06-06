@@ -1,22 +1,69 @@
 import express from 'express';
-import { categoryList, addCategory, listCategories } from '../controllers/categoryController.js';
-import multer from "multer";
+import { addCategory, listCategories } from '../controllers/categoryController.js';
+import multer from 'multer';
+import { v4 as uuidv4 } from 'uuid';
+import { bucket } from './firebase-helper.js';
 
 const categoryRouter = express.Router();
 
-// Image Storage Engine
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
-const storage = multer.diskStorage({
-    destination:"uploads",
-    filename:(req, file, cb)=>{
-       return cb(null,`${Date.now()}${file.originalname}`) 
+categoryRouter.post("/", upload.single("image"), async (req, res) => {
+  try {
+    if (!req.file) {
+      console.error("No file uploaded");
+      return res.status(404).send("No file uploaded");
     }
-})
 
-const upload = multer({storage:storage})
+    const metadata = {
+      metadata: {
+        firebaseStorageDownloadTokens: uuidv4()
+      },
+      contentType: req.file.mimetype,
+      cacheControl: "public, max-age=31536000"
+    };
 
-categoryRouter.post("/add",upload.single("image"), addCategory)
-categoryRouter.get("/list",listCategories)
-categoryRouter.get("/list", categoryList)
+    const uniqueFilename = `imagesCategory/${uuidv4()}-${req.file.originalname}`;
+    const blob = bucket.file(uniqueFilename);
+    const blobStream = blob.createWriteStream({
+      metadata: metadata,
+      gzip: true
+    });
+
+    blobStream.on("error", err => {
+      console.error("Stream error:", err);
+      return res.status(500).json({ error: "Unable to upload image" });
+    });
+
+    blobStream.on("finish", async () => {
+      const imageUrl = await blob.getSignedUrl({
+        action: 'read',
+        expires: '03-09-2491'
+      });
+
+      const categoryData = {
+        name: req.body.name,
+        id: req.body.id,
+        status: req.body.status,
+        image: imageUrl[0],
+      };
+
+      try {
+        await addCategory(categoryData, res);
+      } catch (err) {
+        console.error("Error adding category:", err);
+        return res.status(500).json({ error: "Unable to add category" });
+      }
+    });
+
+    blobStream.end(req.file.buffer);
+  } catch (err) {
+    console.error("Internal server error:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+categoryRouter.get("/", listCategories);
 
 export default categoryRouter;

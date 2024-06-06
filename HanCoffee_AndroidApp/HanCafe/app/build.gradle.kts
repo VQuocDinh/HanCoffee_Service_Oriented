@@ -8,7 +8,7 @@ android {
     signingConfigs {
         create("config") {
             storeFile =
-                file("C:\\Users\\Admin\\Desktop\\HanCoffee_AndroidApp\\HanCafe\\SHA-1\\keystore.jks")
+                file("C:\\Users\\Admin\\Desktop\\HanCoffee_Service_Oriented\\HanCoffee_AndroidApp\\HanCafe\\SHA-1\\keystore.jks")
             storePassword = "123456"
             keyPassword = "123456"
             keyAlias = "keystore"
@@ -35,7 +35,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("config")
+            signingConfig = signingConfigs.getByName("debug")
+        }
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -72,7 +75,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.11.0")
     implementation("androidx.activity:activity:1.8.0")
     implementation(fileTree(mapOf(
-        "dir" to "C:\\Users\\Admin\\Desktop\\HanCoffee_AndroidApp\\HanCafe\\PAYMENT",
+        "dir" to "C:\\Users\\Admin\\Desktop\\HanCoffee_Service_Oriented\\HanCoffee_AndroidApp\\HanCafe\\PAYMENT",
         "include" to listOf("*.aar", "*.jar")
     )))
     implementation(libs.gson)
@@ -80,6 +83,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.places)
     implementation(libs.play.services.places)
+    implementation(libs.slf4j.api)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

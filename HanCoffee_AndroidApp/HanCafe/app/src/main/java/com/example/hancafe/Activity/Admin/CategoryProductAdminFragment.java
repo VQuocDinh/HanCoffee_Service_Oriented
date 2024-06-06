@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.hancafe.Activity.Adapter.CategoryProductAdapter;
 import com.example.hancafe.Activity.Admin.Product.AddCategoryProductFragment;
 import com.example.hancafe.Activity.Admin.Product.AddProductFragment;
+import com.example.hancafe.Api.ApiResponse;
+import com.example.hancafe.Api.ApiService;
 import com.example.hancafe.Model.CategoryProduct;
 import com.example.hancafe.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,6 +30,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CategoryProductAdminFragment extends Fragment {
@@ -72,12 +79,6 @@ public class CategoryProductAdminFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
 
                     CategoryProduct categoryProduct = dataSnapshot.getValue(CategoryProduct.class);
-//                    String catId = dataSnapshot.child("id").getValue(String.class);
-//                    String catName = dataSnapshot.child("name").getValue(String.class);
-//                    String catImg = dataSnapshot.child("curl").getValue(String.class);
-//                    int status = dataSnapshot.child("status").getValue(Integer.class);
-//
-//                    CategoryProduct categoryProduct = new CategoryProduct(catId, catName, catImg, status);
 
                     if(categoryProduct != null && categoryProduct.getStatus() != 1){
                         categories.add(categoryProduct);
@@ -94,6 +95,35 @@ public class CategoryProductAdminFragment extends Fragment {
 
             }
         });
+
+//        ApiService apiService = ApiService.apiService;
+//        Call<ApiResponse<List<CategoryProduct>>> call = apiService.getCategoryList();
+//
+//        call.enqueue(new Callback<ApiResponse<List<CategoryProduct>>>() {
+//            @Override
+//            public void onResponse(Call<ApiResponse<List<CategoryProduct>>> call, Response<ApiResponse<List<CategoryProduct>>> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    categories.clear();
+//                    for (CategoryProduct categoryProduct : response.body().getData()) {
+//                        if (categoryProduct.getStatus() != 1) {
+//                            categories.add(categoryProduct);
+//                        }
+//                    }
+//                    categoryProductAdapter = new CategoryProductAdapter(getContext(), categories);
+//                    recyclerView.setAdapter(categoryProductAdapter);
+//                    categoryProductAdapter.notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ApiResponse<List<CategoryProduct>>> call, Throwable t) {
+//                // Xử lý lỗi khi gọi API thất bại
+//            }
+//        });
+//
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+
     }
 
     private void setControl(View view) {

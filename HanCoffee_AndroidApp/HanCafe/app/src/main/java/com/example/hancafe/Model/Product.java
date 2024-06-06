@@ -5,25 +5,42 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Product implements Serializable, Parcelable {
-    private String purl, name, describe, id, idCategory;
-    private int status, price;
+    @SerializedName("image")
+    private String purl;
+    @SerializedName("name")
+    private String name;
+    @SerializedName("description")
+    private String describe;
+    @SerializedName("_id")
+    private String id;
+    @SerializedName("idCategory")
+    private String idCategory;
+    @SerializedName("status")
+    private int status;
+    @SerializedName("price")
+    private int price;
+    private int quantity;
+
 
     public Product() {
     }
 
-    public Product(String purl, String name, String describe, String id, int status, int price) {
+    public Product(String purl, String name, String describe, String id, int status, int price, int quantity) {
         this.purl = purl;
         this.name = name;
         this.describe = describe;
         this.id = id;
         this.status = status;
         this.price = price;
+        this.quantity = quantity;
     }
 
-    public Product(String purl, String name, String describe, String id, int status, int price, String idCategory) {
+    public Product(String purl, String name, String describe, String id, int status, int price, String idCategory, int quantity) {
         this.purl = purl;
         this.name = name;
         this.describe = describe;
@@ -31,6 +48,7 @@ public class Product implements Serializable, Parcelable {
         this.status = status;
         this.price = price;
         this.idCategory = idCategory;
+        this.quantity = quantity;
     }
 
     protected Product(Parcel in) {
@@ -41,6 +59,7 @@ public class Product implements Serializable, Parcelable {
         idCategory = in.readString();
         status = in.readInt();
         price = in.readInt();
+        quantity = in.readInt();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -111,6 +130,14 @@ public class Product implements Serializable, Parcelable {
         this.idCategory = idCategory;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -125,5 +152,6 @@ public class Product implements Serializable, Parcelable {
         dest.writeInt(status);
         dest.writeInt(price);
         dest.writeString(idCategory);
+        dest.writeInt(quantity);
     }
 }

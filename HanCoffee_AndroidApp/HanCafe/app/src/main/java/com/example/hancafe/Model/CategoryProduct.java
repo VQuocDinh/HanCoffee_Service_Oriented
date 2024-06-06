@@ -5,12 +5,18 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class CategoryProduct implements Serializable, Parcelable {
+    @SerializedName("_id")
     private String id;
+    @SerializedName("name")
     private String name;
+    @SerializedName("image")
     private String curl;
+    @SerializedName("status")
     int status;
 
     public CategoryProduct() {

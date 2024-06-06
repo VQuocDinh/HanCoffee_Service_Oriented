@@ -56,6 +56,9 @@ public class CategoryProductAdapter extends RecyclerView.Adapter<CategoryProduct
         CategoryProduct categoryProduct = categories.get(position);
 
         holder.tvCategoryName.setText(categoryProduct.getName());
+
+//        String baseUrl = "http://10.0.2.2:8888/images/";
+//        String imgUrl = baseUrl + categoryProduct.getCurl();
         Glide.with(holder.itemView.getContext())
                 .load(categoryProduct.getCurl())
                 .into(holder.catImg);

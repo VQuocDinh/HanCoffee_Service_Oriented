@@ -3,18 +3,17 @@ import fs from 'fs';
 
 // add product item
 
-const addProduct = async (req,res)=> {
-
-    let image_filename = `${req.file.filename}`;
+const addProduct = async (productData,res)=> {
 
     const product = new productModel({
-        name:req.body.name,
-        price:req.body.price,
-        category:req.body.category,
-        description:req.body.description,
-        status:req.body.status,
-        id:req.body.id,
-        image:image_filename
+        name:productData.name,
+        price:productData.price,
+        idCategory:productData.idCategory,
+        description:productData.description,
+        status:productData.status,
+        id:productData.id,
+        image:productData.image,
+        quantity:productData.quantity
     })
     try {
         await product.save();
@@ -37,18 +36,25 @@ const listProducts = async (req, res) => {
 }
 
 //remove product item
-const removeProduct = async(req,res) => {
+const removeProduct = async (req, res) => {
     try {
-        const product = await productModel.findById(req.body.id);
-        fs.unlink(`uploads/${product.image}`,()=>{})
+        const productId = req.body.id;
+        const product = await productModel.findById(productId);
 
-        await productModel.findByIdAndDelete(req.body.id);
-        res.json({success:true, message:"Product removed successfully"})
+        if (!product) {
+            return res.status(404).json({ success: false, message: 'Product not found' });
+        }
+
+        // Thay đổi trạng thái của sản phẩm thành 0 để ẩn sản phẩm
+        product.status = 1; // Hoặc giá trị khác tùy vào logic của bạn
+
+        await product.save();
+        res.json({ success: true, message: 'Product removed successfully' });
     } catch (error) {
-        console.log(error)
-        res.json({success:false, message:"Error"})
+        console.error('Error removing product:', error);
+        res.status(500).json({ success: false, message: 'Failed to remove product' });
     }
-}
+};
 
 const editProduct = async (req, res) => {
     const productId = req.params.id;
@@ -56,9 +62,10 @@ const editProduct = async (req, res) => {
         const updatedProduct = {
             name: req.body.name,
             price: req.body.price,
-            category: req.body.category,
+            idCategory: req.body.idCategory,
             description: req.body.description,
-            status: req.body.status
+            status: req.body.status,
+            quantity: req.body.quantity
         };
 
         if (req.file) {

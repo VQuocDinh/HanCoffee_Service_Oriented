@@ -40,7 +40,7 @@ import java.util.ArrayList;
 
 public class EditProductFragment extends Fragment {
 
-    private EditText edtName, edtPrice, edtDescribe;
+    private EditText edtName, edtPrice, edtDescribe, edtQuantity;
     private ImageView ivHinh;
     private Button btnChooseImage, btnUpdate;
     private Spinner spCategory;
@@ -67,6 +67,7 @@ public class EditProductFragment extends Fragment {
         edtName = view.findViewById(R.id.edtName);
         edtPrice = view.findViewById(R.id.edtPrice);
         edtDescribe = view.findViewById(R.id.edtDescribe);
+        edtQuantity = view.findViewById(R.id.edtQuantity);
         ivHinh = view.findViewById(R.id.ivHinh);
         btnChooseImage = view.findViewById(R.id.btnChooseImage);
         btnUpdate = view.findViewById(R.id.btnUpdate);
@@ -91,6 +92,7 @@ public class EditProductFragment extends Fragment {
                 edtName.setText(product.getName());
                 edtPrice.setText(String.valueOf(product.getPrice()));
                 edtDescribe.setText(product.getDescribe());
+                edtQuantity.setText(String.valueOf(product.getQuantity()));
                 Glide.with(requireContext()).load(product.getPurl()).into(ivHinh);
 
                 // Set category của sản phẩm lên đầu tiên trong Spinner
@@ -136,8 +138,9 @@ public class EditProductFragment extends Fragment {
                     int price = Integer.parseInt(edtPrice.getText().toString().trim());
                     String describe = edtDescribe.getText().toString().trim();
                     String categoryName = spCategory.getSelectedItem().toString();
+                    int quantity = Integer.parseInt(edtQuantity.getText().toString().trim());
 
-                    if (name.isEmpty() || categoryName.isEmpty()|| String.valueOf(price).isEmpty() || describe.isEmpty()) {
+                    if (name.isEmpty() || categoryName.isEmpty()|| String.valueOf(price).isEmpty() || describe.isEmpty() || String.valueOf(quantity).isEmpty()) {
                         Toast.makeText(requireContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -147,6 +150,7 @@ public class EditProductFragment extends Fragment {
                     productRef.child("name").setValue(name);
                     productRef.child("price").setValue(price);
                     productRef.child("describe").setValue(describe);
+                    productRef.child("quantity").setValue(quantity);
 
                     // Update idCategory based on the selected category name
                     DatabaseReference categoriesRef = FirebaseDatabase.getInstance().getReference().child("Category_Products");

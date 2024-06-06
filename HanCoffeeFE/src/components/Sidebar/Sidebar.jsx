@@ -1,5 +1,5 @@
 import React from 'react'
-import './Sidebar.scss'
+import './Sidebar.css'
 import { assets } from '../../assets/assets'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { PATH_DASHBOARD } from '../../common/routes/path'

@@ -49,7 +49,7 @@ import java.util.Objects;
 import java.util.UUID;
 public class AddProductFragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1;
-    EditText name,price,describe;
+    EditText name,price,describe, quantity;
     Spinner spCategory;
     ArrayList<String> categoryList = new ArrayList<>();
     ArrayAdapter<String> spinnerAdapter;
@@ -71,6 +71,7 @@ public class AddProductFragment extends Fragment {
 
         price = view.findViewById(R.id.edtPrice);
         describe = view.findViewById(R.id.edtDescribe);
+        quantity = view.findViewById(R.id.edtQuantity);
         imageView = view.findViewById(R.id.imgPreview);
         btnSave= view.findViewById(R.id.btnSave);
         btnBack = view.findViewById(R.id.btnBack);
@@ -153,9 +154,10 @@ public class AddProductFragment extends Fragment {
         int productPrice = Integer.parseInt(price.getText().toString());
         String productDescription = describe.getText().toString();
         String productCategoryName = spCategory.getSelectedItem().toString();
+        int productQuantity = Integer.parseInt(quantity.getText().toString());
 
         // Kiểm tra nếu bất kỳ trường nào cũng không được để trống
-        if (productName.isEmpty() || productCategoryName.isEmpty() || String.valueOf(productPrice).isEmpty() || productDescription.isEmpty()) {
+        if (productName.isEmpty() || productCategoryName.isEmpty() || String.valueOf(productPrice).isEmpty() || productDescription.isEmpty() || String.valueOf(productQuantity).isEmpty()) {
             Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -209,10 +211,11 @@ public class AddProductFragment extends Fragment {
     }
 
     private void uploadProductInfo() {
-// Lấy dữ liệu từ các trường nhập liệu
+    // Lấy dữ liệu từ các trường nhập liệu
         String productName = name.getText().toString();
         int productPrice = Integer.parseInt(price.getText().toString());
         String productDescription = describe.getText().toString();
+        int productQuantity = Integer.parseInt(quantity.getText().toString());
         String productCategoryName = spCategory.getSelectedItem().toString();
 
         // Kiểm tra xem các trường có rỗng không
@@ -244,6 +247,7 @@ public class AddProductFragment extends Fragment {
                             productMap.put("purl", imageUrl.toString());
                         }
                         productMap.put("idCategory", categoryId); // Lấy idCategory từ tên danh mục
+                        productMap.put("quantity", productQuantity);
                         productMap.put("status", 0); // Set status mặc định là 0
 
                         // Thêm sản phẩm vào cơ sở dữ liệu

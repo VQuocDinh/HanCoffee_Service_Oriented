@@ -2,13 +2,11 @@ import mongoose from "mongoose";
 
 
 const orderSchema = new mongoose.OrderSchema({
-    userId:{type:String ,required:true},
-    items:{type:String ,required:true},
-    amount:{type:Number ,required:true},
-    address:{type:String ,required:true},
-    status:{type:String ,default:"Product Processing"},
     date:{type:Date,default:Date.now()},
-    payment:{type:Boolean,default:false}
+    id:{type:String ,required:true},
+    idCategory:{type:String,required:true},
+    idUser:{type:String ,required:true},
+    price:{type:Number ,required:true}
 })
 
 const orderModel = mongoose.models.order || mongoose.model("order", orderSchema);

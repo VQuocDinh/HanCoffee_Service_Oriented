@@ -1,67 +1,95 @@
-import React, { useState } from 'react';
-import './Add.css';
+import React, { useEffect, useState } from 'react'
+import './Add.css'
 import { assets } from '../../../assets/assets'
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
 import axiosInstance from '../../../common/library/query'
 
 const Add = () => {
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState(null)
+    const [categories, setCategories] = useState([])
     const [data, setData] = useState({
         name: '',
         description: '',
-        category: 'Sinh tố',
+        category: '', // Initially empty to ensure it is set correctly
         price: '',
-        status: '1',
-    });
+        status: '0',
+        quantity: '', // Add quantity to state
+    })
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await axiosInstance.get('/api/category/')
+                if (response.data.success) {
+                    setCategories(response.data.data)
+                    if (response.data.data.length > 0) {
+                        setData((prevData) => ({
+                            ...prevData,
+                            category: response.data.data[0]._id,
+                        }))
+                    }
+                } else {
+                    toast.error(response.data.message)
+                }
+            } catch (error) {
+                console.error('Error fetching categories:', error)
+                toast.error('Failed to fetch categories')
+            }
+        }
+
+        fetchCategories()
+    }, [])
 
     const onChangeHandler = (event) => {
-        const name = event.target.name;
-        let value = event.target.value;
+        const name = event.target.name
+        let value = event.target.value
 
         if (name === 'price' && value < 0) {
-            toast.error('Price cannot be negative');
-            value = '';
+            toast.error('Price cannot be negative')
+            value = ''
         }
 
-        setData((prevData) => ({ ...prevData, [name]: value }));
-    };
+        setData((prevData) => ({ ...prevData, [name]: value }))
+    }
 
     const onSubmitHandler = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
 
         if (!image) {
-            toast.error('Please upload an image');
-            return;
+            toast.error('Please upload an image')
+            return
         }
 
-        const formData = new FormData();
-        formData.append('name', data.name);
-        formData.append('description', data.description);
-        formData.append('category', data.category);
-        formData.append('price', Number(data.price));
-        formData.append('status', Number(data.status));
-        formData.append('image', image);
+        const formData = new FormData()
+        formData.append('name', data.name)
+        formData.append('description', data.description)
+        formData.append('price', Number(data.price))
+        formData.append('status', Number(data.status))
+        formData.append('idCategory', data.category) // Add category name
+        formData.append('image', image)
+        formData.append('quantity', Number(data.quantity))
 
         try {
-            const response = await axiosInstance.post(`/api/product/add`, formData);
+            const response = await axiosInstance.post('/api/product/', formData)
             if (response.data.success) {
+                toast.success(response.data.message)
                 setData({
                     name: '',
                     description: '',
-                    category: 'Sinh tố',
+                    category: categories.length > 0 ? categories[0]._id : '',
                     price: '',
-                    status: '1',
-                });
-                setImage(null);
-                toast.success(response.data.message);
+                    status: '0',
+                    quantity: '', // Reset quantity
+                })
+                setImage(null)
             } else {
-                toast.error(response.data.message);
+                toast.error(response.data.message)
             }
         } catch (error) {
-            console.error('Error adding product:', error);
-            toast.error('Failed to add product');
+            console.error('Error adding product:', error)
+            toast.error('Failed to add product')
         }
-    };
+    }
 
     return (
         <div className="add">
@@ -70,7 +98,11 @@ const Add = () => {
                     <p>Upload Image</p>
                     <label htmlFor="image">
                         <img
-                            src={image ? URL.createObjectURL(image) : assets.upload_area }
+                            src={
+                                image
+                                    ? URL.createObjectURL(image)
+                                    : assets.upload_area
+                            }
                             alt=""
                         />
                     </label>
@@ -83,7 +115,7 @@ const Add = () => {
                     />
                 </div>
                 <div className="add-product-name flex-col">
-                    <p>Product Name</p>
+                    <p>Name</p>
                     <input
                         onChange={onChangeHandler}
                         value={data.name}
@@ -94,7 +126,7 @@ const Add = () => {
                     />
                 </div>
                 <div className="add-product-description flex-col">
-                    <p>Product Description</p>
+                    <p>Description</p>
                     <textarea
                         onChange={onChangeHandler}
                         value={data.description}
@@ -105,30 +137,41 @@ const Add = () => {
                     ></textarea>
                 </div>
 
-                <div className="add-category-price">
-                    <div className="add-category flex-col">
-                        <p>Product category</p>
+                <div className="add-category-price-quantity flex-row">
+                    <div className="add-categories flex-col">
+                        <p>Category</p>
                         <select
                             onChange={onChangeHandler}
                             value={data.category}
                             name="category"
                             required
                         >
-                            <option value="Sinh tố">Sinh tố</option>
-                            <option value="Cà phê">Cà phê</option>
-                            <option value="Trà sữa">Trà sữa</option>
-                            <option value="Nước ép hoa quả">Nước ép hoa quả</option>
-                            <option value="Soda">Soda</option>
+                            {categories.map((category) => (
+                                <option key={category._id} value={category._id}>
+                                    {category.name}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div className="add-price flex-col">
-                        <p>Product price</p>
+                        <p>Price</p>
                         <input
                             onChange={onChangeHandler}
                             value={data.price}
                             type="number"
                             name="price"
-                            placeholder="20$"
+                            placeholder="Type here"
+                            required
+                        />
+                    </div>
+                    <div className="add-quantity flex-col">
+                        <p>Quantity</p>
+                        <input
+                            onChange={onChangeHandler}
+                            value={data.quantity}
+                            type="number"
+                            name="quantity"
+                            placeholder="Type here"
                             required
                         />
                     </div>
@@ -138,7 +181,7 @@ const Add = () => {
                 </button>
             </form>
         </div>
-    );
-};
+    )
+}
 
-export default Add;
+export default Add

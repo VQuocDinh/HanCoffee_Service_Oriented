@@ -22,6 +22,7 @@
             android:padding="10dp" />
 
         <LinearLayout
+            android:id="@+id/lnExportPdf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -39,7 +40,8 @@
                 style="?android:spinnerStyle"
                 android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="@color/red"
                 android:contentDescription="NULL"
                 android:onClick="openDatePicker"
                 android:text="01/01/2002"
@@ -48,19 +50,28 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Xuất file"
+                android:text="Xuất file PDF"
+                android:padding="8dp"
                 android:id="@+id/btnExportPDF"
                 android:background="@drawable/custom_background_linear_container"
                 android:backgroundTint="@color/red"
                 android:textColor="@color/white"
-                />
+                android:visibility="gone"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xuất file PDF"
+                android:padding="8dp"
+                android:id="@+id/btnExport"
+                android:background="@drawable/custom_background_linear_container"
+                android:backgroundTint="@color/red"
+                android:textColor="@color/white" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/chartBar"
             android:layout_width="match_parent"
             android:layout_height="245dp"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <!--        <com.github.mikephil.charting.charts.BarChart-->
             <!--            android:id="@+id/barChart"-->
             <!--            android:layout_width="match_parent"-->
