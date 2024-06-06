@@ -201,6 +201,7 @@
         android:text="Back"
         android:textSize="24dp"
         android:textColor="@color/white"
+        android:textAllCaps="false"
         android:backgroundTint="@color/red"
         android:gravity="center"
         android:id="@+id/btnBack"

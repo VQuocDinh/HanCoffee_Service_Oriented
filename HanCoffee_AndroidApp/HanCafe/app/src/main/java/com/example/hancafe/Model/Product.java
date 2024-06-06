@@ -5,23 +5,39 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Product implements Serializable, Parcelable {
-    private String purl, name, describe, id, idCategory;
-    private int status, price, quantity;
+    @SerializedName("image")
+    private String purl;
+    @SerializedName("name")
+    private String name;
+    @SerializedName("description")
+    private String describe;
+    @SerializedName("_id")
+    private String id;
+    @SerializedName("idCategory")
+    private String idCategory;
+    @SerializedName("status")
+    private int status;
+    @SerializedName("price")
+    private int price;
+    private int quantity;
+
 
     public Product() {
     }
 
-    public Product(String purl, String name, String describe, String id, int status, int price) {
+    public Product(String purl, String name, String describe, String id, int status, int price, int quantity) {
         this.purl = purl;
         this.name = name;
         this.describe = describe;
         this.id = id;
         this.status = status;
         this.price = price;
-
+        this.quantity = quantity;
     }
 
     public Product(String purl, String name, String describe, String id, int status, int price, String idCategory, int quantity) {
