@@ -6,6 +6,14 @@ import downloadLink from './downloadApp.png'
 import instagramLogo from './instagram.png'
 import facebookLogo from './facebook.png'
 import androidImg from './android-app.png'
+import edit_icon from './edit.png'
+import delete_icon from './delete.png'
+import list_icon from './list_icon.png'
+import order_icon from './order.png'
+import report_icon from './report.png'
+import user_icon from './users.png'
+import upload_area from './upload-area.png'
+
 
 export const assets = {
     logoBranch,
@@ -14,7 +22,15 @@ export const assets = {
     downloadLink,
     instagramLogo,
     facebookLogo,
-    androidImg
+    androidImg,
+    edit_icon,
+    delete_icon,
+    list_icon,
+    order_icon,
+    report_icon,
+    user_icon,
+    upload_area
+
 }
 
 export const menu_list = [
