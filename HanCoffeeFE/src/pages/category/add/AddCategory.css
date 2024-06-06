@@ -1,11 +1,10 @@
-.add-category{
+.add-category {
     width: 70%;
-    margin-left: max(5vw,25px);
+    margin-left: max(5vw, 25px);
     margin-top: 50px;
     color: #6d6d6d;
     font-size: 16px;
 }
-
 
 .add-category form {
     background-color: #fff;
@@ -23,7 +22,7 @@
 }
 
 .add-img-upload p,
-.add-product-name p {
+.add-category-name p {
     margin: 0 0 10px;
     font-weight: bold;
 }
@@ -45,7 +44,7 @@
     object-fit: cover;
 }
 
-.add-product-name input {
+.add-category-name input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -53,7 +52,7 @@
 
 .add-btn {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #8b0305;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -62,7 +61,7 @@
 }
 
 .add-btn:hover {
-    background-color: #0056b3;
+    background-color: #680707;
 }
 
 @media (max-width: 600px) {
@@ -74,7 +73,7 @@
         max-width: 100%;
     }
 
-    .add-product-name input {
+    .add-category-name input {
         padding: 8px;
     }
 

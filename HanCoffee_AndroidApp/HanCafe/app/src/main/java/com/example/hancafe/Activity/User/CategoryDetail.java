@@ -2,6 +2,7 @@ package com.example.hancafe.Activity.User;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,10 +66,13 @@ public class CategoryDetail extends AppCompatActivity implements ProductsAdapter
                             String productImg = dataSnapshot.child("purl").getValue(String.class);
                             int productPrice = dataSnapshot.child("price").getValue(Integer.class);
                             String productDecs = dataSnapshot.child("describe").getValue(String.class);
+                            String productIdCategory = dataSnapshot.child("idCategory").getValue(String.class);
+                            int producQuantity = dataSnapshot.child("quantity").getValue(Integer.class);
 
-                            Product product = new Product(productImg, productName, productDecs, productId, productStatus,productPrice);
+                            Product product = new Product(productImg, productName, productDecs, productId, productStatus, productPrice, productIdCategory, producQuantity);
                             products.add(product);
                         }
+
                     }
                     productsAdapter = new ProductsAdapter(products);
                     rvProduct.setAdapter(productsAdapter);

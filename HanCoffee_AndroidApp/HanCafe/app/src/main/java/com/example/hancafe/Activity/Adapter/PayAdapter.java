@@ -48,18 +48,29 @@ public class PayAdapter extends RecyclerView.Adapter<PayAdapter.ViewHolder> {
 
         int price = cartItem.getQuantity() * cartItem.getProductPrice();
         if (cartItem.getSizeId() == 0) {
+            int originalPrice = price;
             holder.tvSize.setText("S");
+            holder.tvPriceProduct.setText(String.valueOf(originalPrice));
         } else if (cartItem.getSizeId() == 1) {
+            int originalPrice = (int) (price * 1.25);
             holder.tvSize.setText("M");
+            holder.tvPriceProduct.setText(String.valueOf(originalPrice));
         } else {
+            int originalPrice = (int) (price * 1.5);
             holder.tvSize.setText("L");
+            holder.tvPriceProduct.setText(String.valueOf(originalPrice));
         }
-        holder.tvPriceProduct.setText(String.valueOf(price));
     }
     public int calculateTotalPriceAfterDiscount(String promotionCode) {
         int totalPrice = 0;
         for (CartItem cartItem : data) {
             int price = cartItem.getQuantity() * cartItem.getProductPrice();
+
+            if(cartItem.getSizeId() == 1){
+                price *= 1.25;
+            } else if (cartItem.getSizeId() == 2) {
+                price *= 1.5;
+            }
             if (!promotionCode.equals("Chưa chọn mã")) {
                 // Áp dụng mã khuyến mãi nếu có
                 for (Promotion promotion : promotions) {

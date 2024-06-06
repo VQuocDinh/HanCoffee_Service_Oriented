@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 
 import com.example.hancafe.Model.CartDetail;
+import com.example.hancafe.Model.CartItem;
 import com.example.hancafe.Model.Product;
 import com.example.hancafe.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,15 +30,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+
 public class ProductDetail extends AppCompatActivity {
-    private TextView tvQuantity, tvNameProduct, tvProductInfor, tvCartCount;
+    private TextView tvQuantity, tvNameProduct, tvProductInfor, tvCartCount, tvPrice;
     private Button btn1, btn2, btn3, btnDecrease, btnIncrease, btnAddCart, btnSmallSize, btnMidSize, btnBigSize;
     private ImageView btnBack, btnCart, imgProduct;
     private int count = 1;
     private int cartItemCount = 0;
     private Boolean btnSmallSizeIsActive, btnMidSizeIsActive, btnBigSizeIsActive;
     private int idSize = 0;
-
+    private int originalPrice; // Biến lưu trữ giá gốc của sản phẩm
+    private int currentPrice; // biến lưu giá hiện tại
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,17 +96,29 @@ public class ProductDetail extends AppCompatActivity {
         tvNameProduct = findViewById(R.id.tvNameProduct);
         tvProductInfor = findViewById(R.id.tvProductInfor);
         tvCartCount = findViewById(R.id.tvCartCount);
+        tvPrice = findViewById(R.id.tvPrice);
+        tvPrice.setVisibility(View.GONE);
 
     }
 
     private void setEvent() {
         Intent intent = getIntent();
         Product product = (Product) intent.getSerializableExtra("product");
+
         Glide.with(this)
                 .load(product.getPurl())
                 .into(imgProduct);
         tvNameProduct.setText(product.getName());
         tvProductInfor.setText(product.getDescribe());
+
+        originalPrice = product.getPrice();
+        DecimalFormat df = new DecimalFormat("###,###.##");
+        String formattedPrice = df.format(originalPrice) + "đ";
+        tvPrice.setText(formattedPrice);
+//        tvPrice.setText(String.valueOf(originalPrice));
+
+        currentPrice = originalPrice;
+
 
         btn1.setBackgroundColor(getResources().getColor(R.color.black));
         btn2.setBackgroundColor(getResources().getColor(R.color.mainColor));
@@ -117,6 +133,7 @@ public class ProductDetail extends AppCompatActivity {
                 if (count > 1) {
                     count--;
                     tvQuantity.setText(String.valueOf(count));
+                    updatePrice(currentPrice, count);
                 }
             }
         });
@@ -126,6 +143,7 @@ public class ProductDetail extends AppCompatActivity {
             public void onClick(View v) {
                 count++;
                 tvQuantity.setText(String.valueOf(count));
+                updatePrice(currentPrice, count);
             }
         });
 
@@ -151,6 +169,8 @@ public class ProductDetail extends AppCompatActivity {
             public void onClick(View v) {
                 updateButtonState((Button) v);
                 idSize = 0;
+                currentPrice = originalPrice;
+                updatePrice(currentPrice, count); // Hiển thị giá gốc cho kích thước nhỏ
             }
         });
 
@@ -160,6 +180,8 @@ public class ProductDetail extends AppCompatActivity {
                 btnMidSize.setBackgroundColor(getResources().getColor(R.color.black));
                 updateButtonState((Button) v);
                 idSize = 1;
+                currentPrice = (int) (originalPrice * 1.25);
+                updatePrice(currentPrice, count);
             }
         });
         btnBigSize.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +190,8 @@ public class ProductDetail extends AppCompatActivity {
                 btnBigSize.setBackgroundColor(getResources().getColor(R.color.black));
                 updateButtonState((Button) v);
                 idSize = 2;
+                currentPrice = (int) (originalPrice * 1.5);
+                updatePrice(currentPrice, count);
             }
         });
 
@@ -182,17 +206,16 @@ public class ProductDetail extends AppCompatActivity {
         });
     }
 
+    private void updatePrice(int newPrice, int quantity) {
+        int totalPrice = newPrice * quantity;
+        DecimalFormat df = new DecimalFormat("###,###.##");
+        String formattedPrice = df.format(totalPrice) + "đ";
+        tvPrice.setText(formattedPrice);
+//        tvPrice.setText(String.valueOf(totalPrice));
+    }
+
     private void addProductToCart() {
-
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-
         Intent intent = getIntent();
-
-//        String idUser = "";
-//        if (currentUser != null) {
-//            idUser = currentUser.getUid();
-//        }
 
         Product product = (Product) intent.getSerializableExtra("product");
         if (product == null) {

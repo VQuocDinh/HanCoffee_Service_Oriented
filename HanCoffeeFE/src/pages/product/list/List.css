@@ -29,7 +29,7 @@ h1 {
 }
 
 .btn-add {
-    background-color: #28a745;
+    background-color: #8b0305;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -39,7 +39,7 @@ h1 {
 }
 
 .btn-add:hover {
-    background-color: #218838;
+    background-color: #680707;
 }
 
 .list-table {
@@ -49,7 +49,7 @@ h1 {
 
 .list-table-format {
     display: grid;
-    grid-template-columns: 1fr 0.5fr 1fr 0.5fr 1fr 0.25fr 0.25fr;
+    grid-template-columns: 1fr 1fr 0.5fr 1fr 0.5fr 0.5fr 0.5fr;
     align-items: center;
     gap: 10px;
     padding: 12px 15px;
@@ -83,6 +83,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 80px;
 }
 
 .list-table-format p {

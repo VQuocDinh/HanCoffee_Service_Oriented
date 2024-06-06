@@ -1,6 +1,8 @@
 /* ListCategory.css */
 
 .category-list-container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 1200px;
     background-color: #fff;
@@ -16,21 +18,17 @@
 }
 
 .category-list-btn-add {
-    display: inline-block;
-    margin: 0 auto 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
+    margin-left: auto;
+    margin-bottom: 10px;
+    padding: 10px;
     border: none;
+    color: white;
+    background-color: #8b0305;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    
 }
 
 .category-list-btn-add:hover {
-    background-color: #0056b3;
+    background-color: #680707;
 }
 
 .category-list-table {
@@ -53,7 +51,10 @@
     text-align: left;
     border-radius: 5px;
     color: #fff;
-    
+    padding-inline: 10px;
+}
+.b {
+    text-align: center;
 }
 
 .category-list-table-row {
@@ -86,7 +87,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 10px;
+    margin-right: 24px;
     transition: transform 0.3s;
 }
 

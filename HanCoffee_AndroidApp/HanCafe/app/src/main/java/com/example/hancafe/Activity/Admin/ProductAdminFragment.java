@@ -19,8 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.hancafe.Activity.Adapter.CategoryProductAdapter;
 import com.example.hancafe.Activity.Adapter.ProductAdapter;
 import com.example.hancafe.Activity.Admin.Product.AddProductFragment;
+import com.example.hancafe.Api.ApiResponse;
+import com.example.hancafe.Api.ApiService;
+import com.example.hancafe.Model.CategoryProduct;
 import com.example.hancafe.Model.Product;
 import com.example.hancafe.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,6 +35,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ProductAdminFragment extends Fragment {
@@ -94,6 +102,31 @@ public class ProductAdminFragment extends Fragment {
 
                     }
                 });
+
+        ApiService apiService = ApiService.apiService;
+        Call<ApiResponse<List<Product>>> call = apiService.getProductList();
+
+        call.enqueue(new Callback<ApiResponse<List<Product>>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<List<Product>>> call, Response<ApiResponse<List<Product>>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    productList.clear();
+                    for (Product product : response.body().getData()) {
+                        if (product.getStatus() != 1) {
+                            productList.add(product);
+                        }
+                    }
+                    productAdapter = new ProductAdapter(getContext(), productList);
+                    recyclerView.setAdapter(productAdapter);
+                    productAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<List<Product>>> call, Throwable t) {
+                // Xử lý lỗi khi gọi API thất bại
+            }
+        });
 
         productAdapter.setOnItemClickListener(new ProductAdapter.OnItemClickListener() {
             @Override

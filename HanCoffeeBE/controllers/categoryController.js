@@ -1,24 +1,22 @@
 import categoryModel from "../models/categoryModel.js";
 import fs from 'fs';
 
-const addCategory = async (req,res) =>{
-    let image_filename = `${req.file.filename}`;
-
+const addCategory = async (categoryData, res) => {
     const category = new categoryModel({
-        name:req.body.name,
-        id:req.body.id,
-        status :req.body.status,
-        image:image_filename
-    })
+        name: categoryData.name,
+        id: categoryData.id,
+        status: categoryData.status,
+        image: categoryData.image
+    });
+    
     try {
         await category.save();
-        res.json({success:true, message:"Category added successfully"})
+        res.json({success: true, message: "Category added successfully"});
     } catch (error) {
-        console.log(error)
-        res.json({success:false, message:"Error"})
+        console.log(error);
+        res.json({success: false, message: "Error adding category"});
     }
-}
-
+};
 //all categories list
 const listCategories = async(req, res) =>{
     try {
@@ -31,16 +29,5 @@ const listCategories = async(req, res) =>{
 }
 
 
-// fetch all category
-const categoryList = async (req,res)=>{
-    try {
-        const categorys = await categoryModel.find({})
-        res.json({success:true,data:categorys})
-    } catch (error) {
-        console.log(error)
-        res.json({success:false,message:"Error"})
 
-    }
-}
-
-export {categoryList, addCategory, listCategories}
+export {addCategory, listCategories}

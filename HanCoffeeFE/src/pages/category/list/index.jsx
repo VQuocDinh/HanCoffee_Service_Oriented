@@ -16,7 +16,7 @@ const CategoryList = () => {
     }, [])
 
     const fetchCategories = async () => {
-        const response = await axiosInstance.get('/api/category/list')
+        const response = await axiosInstance.get('/api/category/')
         if (response.data.success) {
             setCategories(response.data.data)
         } else {
@@ -46,39 +46,42 @@ const CategoryList = () => {
     return (
         <div className="category-list-container">
             <h1>Category Management</h1>
-            <button className="category-list-btn-add" onClick={handleAddCategory}>
+            <button
+                className="category-list-btn-add"
+                onClick={handleAddCategory}
+            >
                 Add Category
             </button>
             <div className="category-list-table">
-                    <div className="category-list-table-header">
-                        <b>Name</b>
-                        <b>Image</b>
-                        <b>Edit</b>
-                        <b>Delete</b>
-                    </div>
-                    {categories.map((item, index) => (
-                        <div key={index} className="category-list-table-row">
-                            <p>{item.name}</p>
-                            <img
-                                className="category-list-product-img"
-                                src={`${BASE_URL}/images/${item.image}`}
-                                alt={item.name}
-                            />
-                            <div
-                                className="category-list-action-icon"
-                                onClick={() => handleEditProduct(item._id)}
-                            >
-                                <img src={assets.edit_icon} alt="Edit" />
-                            </div>
-                            <div
-                                className="category-list-action-icon"
-                                onClick={() => removeProduct(item._id)}
-                            >
-                                <img src={assets.delete_icon} alt="Delete" />
-                            </div>
-                        </div>
-                    ))}
+                <div className="category-list-table-header">
+                    <b>Name</b>
+                    <b>Image</b>
+                    <b>Edit</b>
+                    <b>Delete</b>
                 </div>
+                {categories.map((item, index) => (
+                    <div key={index} className="category-list-table-row">
+                        <p>{item.name}</p>
+                        <img
+                            className="category-list-product-img"
+                            src={item.image}
+                            alt={item.name}
+                        />
+                        <div
+                            className="category-list-action-icon"
+                            onClick={() => handleEditProduct(item._id)}
+                        >
+                            <img src={assets.edit_icon} alt="Edit" />
+                        </div>
+                        <div
+                            className="category-list-action-icon"
+                            onClick={() => removeProduct(item._id)}
+                        >
+                            <img src={assets.delete_icon} alt="Delete" />
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
