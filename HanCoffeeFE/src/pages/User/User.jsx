@@ -47,7 +47,7 @@ const UserInfor = () => {
           </div>
         ))}
 
-        <div className="user__content-body-sex">
+        {/* <div className="user__content-body-sex">
           <span>Giới tính</span>
           <div className="user__content-body-sex-select">
             <label>
@@ -61,7 +61,7 @@ const UserInfor = () => {
             </label>
           </div>
         
-        </div>
+        </div> */}
       </div>
 
       <div className="user__content-body-update">

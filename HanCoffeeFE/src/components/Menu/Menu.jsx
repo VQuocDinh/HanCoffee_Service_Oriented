@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import './Menu.css'
+import './Menu.scss'
 import { StoreContext } from '../../context/StoreContext'
 const Menu = () => {
 

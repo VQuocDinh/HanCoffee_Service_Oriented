@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import './Product.css'
+import './Product.scss'
 import { StoreContext } from '../../context/StoreContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose, faPlusCircle } from '@fortawesome/free-solid-svg-icons'

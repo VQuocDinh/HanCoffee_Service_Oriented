@@ -1,5 +1,5 @@
 import 'react-toastify/dist/ReactToastify.css'
-import Router from './common/routes/router'
+// import Router from './common/routes/router'
 
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar/customer/NavbarCustomer'
@@ -12,19 +12,11 @@ import User from './pages/User/User'
 
 const App = () => {
   return (
-    <>
-      <div className='app'>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/order' element={<Order />} /> 
-          <Route path='/productDetail' element={<ProductDetail />} /> 
-          <Route path='/user' element={<User />} /> 
-        </Routes>
-      </div>
-      <Footer />
-    </>
+
+    <div className='app'>
+      
+    </div>
+
 
   )
 }

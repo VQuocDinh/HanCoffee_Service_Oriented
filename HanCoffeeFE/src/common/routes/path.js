@@ -42,13 +42,19 @@ export const PATH_CUSTOMER = {
     root: ROOT_CUSTOMER,
     general: {
         home: {
-            root: path(ROOT_CUSTOMER, 'home'),
+            root: path(ROOT_CUSTOMER, ''),
         },
         cart: {
             root: path(ROOT_CUSTOMER, 'cart'),
         },
+        productDetail: {
+            root: path(ROOT_CUSTOMER, 'productDetail'),
+        },
         order: {
-            order: path(ROOT_CUSTOMER, '/order'),
+            root: path(ROOT_CUSTOMER, 'order'),
+        },
+        user: {
+            root: path(ROOT_CUSTOMER, 'user'),
         },
     },
 }
