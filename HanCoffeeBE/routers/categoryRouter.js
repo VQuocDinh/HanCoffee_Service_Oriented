@@ -64,6 +64,6 @@ categoryRouter.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-categoryRouter.get("/", listCategories);
+categoryRouter.get("/list", listCategories);
 
 export default categoryRouter;

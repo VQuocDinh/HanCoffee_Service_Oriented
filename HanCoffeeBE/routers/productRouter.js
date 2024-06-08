@@ -68,7 +68,7 @@ productRouter.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-productRouter.get("/", listProducts);
+productRouter.get("/list", listProducts);
 productRouter.patch("/", removeProduct);
 productRouter.put("/", editProduct);
 
