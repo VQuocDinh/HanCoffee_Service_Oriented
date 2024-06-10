@@ -18,26 +18,38 @@ const CategoryList = () => {
     const fetchCategories = async () => {
         const response = await axiosInstance.get('/api/category/')
         if (response.data.success) {
-            setCategories(response.data.data)
+            // Chỉ lấy các loại sản phẩm có status = 0
+            const filteredList = response.data.data.filter(
+                (item) => item.status === 0
+            )
+            setCategories(filteredList)
         } else {
-            toast.error('Error fetching product list')
+            toast.error('Error fetching category list')
         }
     }
 
-    // const handleEdit = (categoryId) => {
-    //     navigate(`/edit-category/${categoryId}`);
-    // };
+    const removeCategory = async (categoryId) => {
+        try {
+            const response = await axiosInstance.patch(
+                `/api/category/${categoryId}`
+            )
 
-    // const handleDelete = async (categoryId) => {
-    //     try {
-    //         await axiosInstance.delete(`/api/categories/${categoryId}`);
-    //         setCategories(categories.filter(category => category._id !== categoryId));
-    //         toast.success('Category deleted successfully');
-    //     } catch (error) {
-    //         console.error('Error deleting category:', error);
-    //         toast.error('Failed to delete category');
-    //     }
-    // };
+            if (response.data.success) {
+                toast.success(response.data.message)
+                // Fetch the updated list after successful removal
+                fetchCategories()
+            } else {
+                toast.error('Error removing category')
+            }
+        } catch (error) {
+            console.error('Error removing category:', error)
+            toast.error('Failed to remove category')
+        }
+    }
+
+    const handleEditCategory = (categoryId) => {
+        navigate(`${PATH_DASHBOARD.general.category.root}/${categoryId}`)
+    }
 
     const handleAddCategory = () => {
         navigate(PATH_DASHBOARD.general.category.add)
@@ -69,13 +81,13 @@ const CategoryList = () => {
                         />
                         <div
                             className="category-list-action-icon"
-                            onClick={() => handleEditProduct(item._id)}
+                            onClick={() => handleEditCategory(item._id)}
                         >
                             <img src={assets.edit_icon} alt="Edit" />
                         </div>
                         <div
                             className="category-list-action-icon"
-                            onClick={() => removeProduct(item._id)}
+                            onClick={() => removeCategory(item._id)}
                         >
                             <img src={assets.delete_icon} alt="Delete" />
                         </div>

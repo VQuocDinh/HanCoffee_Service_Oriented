@@ -1,22 +1,22 @@
-.place-order {
+.order {
     /* margin-top: 150px; */
     display: flex;
     gap: 80px;
 }
 
-.place-order__left {}
+.order__left {}
 
-.place-order__left-delivery {
+.order__left-delivery {
     margin-bottom: 80px;
 
 }
 
-.place-order__left-delivery-title {
+.order__left-delivery-title {
     margin-bottom: 20px;
 
 }
 
-.place-order__left-delivery-type {
+.order__left-delivery-type {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -25,33 +25,33 @@
 
 }
 
-.place-order__left-delivery-type>input {
+.order__left-delivery-type>input {
     padding: 8px;
 
 
 }
 
 
-.place-order__left-pay {}
+.order__left-pay {}
 
-.place-order__left-pay-title {
+.order__left-pay-title {
     margin-bottom: 20px;
 
 }
 
-.place-order__left-pay-list {
+.order__left-pay-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
 
 }
 
-.place-order__left-pay-list-item>input {
+.order__left-pay-list-item>input {
     margin-right: 10px;
     cursor: pointer;
 }
 
-.place-order__right {
+.order__right {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -60,20 +60,20 @@
 
 }
 
-.place-order__right-product {
+.order__right-product {
     padding: 8px;
 
 }
 
-.place-order__right-product>h2 {
+.order__right-product>h2 {
     margin-bottom: 20px;
 
 
 }
 
-.place-order__right-product-body {}
+.order__right-product-body {}
 
-.place-order__right-product-list {
+.order__right-product-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -81,17 +81,17 @@
 
 }
 
-.place-order__right-product-list-item {}
+.order__right-product-list-item {}
 
-.place-order__right-price {
+.order__right-price {
     margin-top: auto;
     padding: 8px;
 
 }
 
-.place-order__right-price-delivery {}
+.order__right-price-delivery {}
 
-.place-order__right-total {
+.order__right-total {
     margin-top: auto;
     padding: 8px;
     display: flex;
@@ -101,9 +101,9 @@
     border-radius: 2px;
 }
 
-.place-order__right-total-left {}
+.order__right-total-left {}
 
-.place-order__right-total-btn {
+.order__right-total-btn {
     margin-left: auto;
     width: 20%;
     background-color: var(--white-color);

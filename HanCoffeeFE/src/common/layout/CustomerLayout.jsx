@@ -5,17 +5,15 @@ import Footer from '../../components/Footer/Footer'
 import StoreContextProvider from '../../context/StoreContext'
 
 const CustomerLayout = () => {
-  return (
-    <>
-      <div className="app__content">
-        <StoreContextProvider>
-          <NavbarCustomer />
-          <Outlet />
-        </StoreContextProvider>
-      </div>
-      <Footer />
-    </>
-  )
+    return (
+        <div className="app">
+            <StoreContextProvider>
+                <NavbarCustomer />
+                <Outlet />
+                <Footer />
+            </StoreContextProvider>
+        </div>
+    )
 }
 
 export default CustomerLayout

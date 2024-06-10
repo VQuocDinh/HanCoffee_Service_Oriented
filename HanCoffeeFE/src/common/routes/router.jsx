@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react'
 import { createBrowserRouter, useRoutes } from 'react-router-dom'
 import { PATH_CUSTOMER, PATH_DASHBOARD } from './path'
 import Report from '../../pages/Report/Report'
+import Orders from '../../pages/orderStatus/Orders.jsx'
 import Users from '../../pages/Users/Users'
 import Cart from '../../pages/Cart/Cart'
 import ProductDetail from '../../pages/ProductDetail/ProductDetail.jsx'
@@ -13,8 +14,9 @@ import AuthGuard from '../guard/AuthGuard'
 import AdminLayout from '../layout/AdminLayout'
 import CustomerLayout from '../layout/CustomerLayout'
 import StoreContextProvider from '../../context/StoreContext.jsx'
-
-
+import Staff from '../../pages/staff/Staff.jsx'
+import Login from '../../pages/Login/Login.jsx'
+import Customer from '../../pages/customer/Customer.jsx'
 
 const Loadable = (Component) => (props) => {
     // const { pathname } = useLocation();
@@ -47,15 +49,14 @@ const ProductAddComponent = Loadable(
 const CategoryListComponent = Loadable(
     lazy(() => import('../../pages/category/list'))
 )
-// const CategoryEditComponent = Loadable(
-//     lazy(() => import('../../pages/category/edit'))
-// )
+const CategoryEditComponent = Loadable(
+    lazy(() => import('../../pages/category/edit'))
+)
 const CategoryAddComponent = Loadable(
     lazy(() => import('../../pages/category/add'))
 )
 
 export const router = createBrowserRouter([
-
     {
         path: '',
         element: (
@@ -139,7 +140,7 @@ export const router = createBrowserRouter([
                         element: <ProductAddComponent />,
                     },
                     {
-                        path: `${PATH_DASHBOARD.general.product.edit}/:productId`,
+                        path: PATH_DASHBOARD.general.product.edit,
                         element: <ProductEditComponent />,
                     },
                 ],
@@ -155,14 +156,12 @@ export const router = createBrowserRouter([
                         path: PATH_DASHBOARD.general.category.add,
                         element: <CategoryAddComponent />,
                     },
-                    // {
-                    //     path: `${PATH_DASHBOARD.general.category.edit}/:categoryId`,
-                    //     element: <CategoryEditComponent />,
-                    // },
+                    {
+                        path: PATH_DASHBOARD.general.category.edit,
+                        element: <CategoryEditComponent />,
+                    },
                 ],
             },
-
-
 
             {
                 children: [
@@ -173,14 +172,14 @@ export const router = createBrowserRouter([
                 ],
             },
 
-            // {
-            //     children: [
-            //         {
-            //             path: PATH_DASHBOARD.general.order.list,
-            //             element: <Orders />,
-            //         },
-            //     ],
-            // },
+            {
+                children: [
+                    {
+                        path: PATH_DASHBOARD.general.order.list,
+                        element: <Orders />,
+                    },
+                ],
+            },
 
             {
                 children: [
@@ -190,10 +189,33 @@ export const router = createBrowserRouter([
                     },
                 ],
             },
+
+            {
+                children: [
+                    {
+                        path: PATH_DASHBOARD.general.staff.list,
+                        element: <Staff />,
+                    },
+                ],
+            },
+
+            {
+                children: [
+                    {
+                        path: PATH_DASHBOARD.general.customer.list,
+                        element: <Customer />,
+                    },
+                ],
+            },
         ],
     },
+    {
+        path: 'login',
+        element: (
+            <Login/>
+        ),
+    }
 ])
-
 
 // User
 
