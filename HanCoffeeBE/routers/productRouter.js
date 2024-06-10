@@ -1,5 +1,5 @@
 import express from 'express';
-import { addProduct, editProduct, listProducts, removeProduct } from '../controllers/productController.js';
+import { addProduct, editProduct, listProducts, removeProduct, getProductById } from '../controllers/productController.js';
 import multer from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 import { bucket } from './firebase-helper.js';
@@ -69,7 +69,16 @@ productRouter.post("/", upload.single("image"), async (req, res) => {
 });
 
 productRouter.get("/", listProducts);
-productRouter.patch("/", removeProduct);
-productRouter.put("/", editProduct);
+productRouter.patch("/:id", removeProduct);
+productRouter.put("/:id", upload.single("image"), async (req, res) => {
+  try {
+    await editProduct(req, res); // Call editProduct function from controller
+  } catch (err) {
+    console.error("Error editing product:", err);
+    return res.status(500).json({ error: "Unable to edit product" });
+  }
+});
+
+productRouter.get("/:id", getProductById);
 
 export default productRouter;

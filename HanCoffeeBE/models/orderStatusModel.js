@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 
-const orderSchema = new mongoose.OrderSchema({
+const orderStatusSchema = new mongoose.OrderSchema({
     date:{type:Date,default:Date.now()},
     id:{type:String ,required:true},
     idCategory:{type:String,required:true},
@@ -9,5 +9,5 @@ const orderSchema = new mongoose.OrderSchema({
     price:{type:Number ,required:true}
 })
 
-const orderModel = mongoose.models.order || mongoose.model("order", orderSchema);
-export default orderModel;
+const orderStatusModel = mongoose.models.order || mongoose.model("orderStatus", orderStatusSchema);
+export default orderStatusModel;

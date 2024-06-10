@@ -1,14 +1,45 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
-    id:{type:String, required:true},
-    address:{type:String, required:true},
-    name:{type:String, required:true},
-    phone:{type:String, required:true},
-    email:{type:String, required:true,unique:true},
-    date:{type:Date,default:Date.now()},
-    role:{type:Number ,required:true}
-},{minimize:false})
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    role: {
+        type: Number,
+        enum: [0, 1, 2],
+        default: 2,
+    },
+    cartdata: {
+        type: Object,
+        default: {},
+    },
+    name: {
+        type: String,
+        default: '',
+    },
+    phone: {
+        type: String,
+        default: '',
+    },
+    address: {
+        type: String,
+        default: '',
+    },
+    AI: {
+        type: String,
+        default: '',
+    },
+}, {
+    timestamps: true,
+});
 
-const userModel = mongoose.models.user || mongoose.model("user", userSchema);
-export default userModel;
+const User = mongoose.model('User', userSchema);
+
+export default User;
