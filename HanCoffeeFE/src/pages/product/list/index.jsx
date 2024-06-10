@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { assets } from '../../../assets/assets'
 import axiosInstance from '../../../common/library/query'
 import { BASE_URL } from '../../../config'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { PATH_DASHBOARD } from '../../../common/routes/path'
 
 const List = () => {
@@ -31,14 +31,14 @@ const List = () => {
 
     const removeProduct = async (productId) => {
         try {
-            const response = await axiosInstance.patch(`/api/product/`, {
-                id: productId,
-            })
-
-            await fetchList()
+            const response = await axiosInstance.patch(
+                `/api/product/${productId}`
+            )
 
             if (response.data.success) {
                 toast.success(response.data.message)
+                // Fetch the updated list after successful removal
+                fetchList()
             } else {
                 toast.error('Error removing product')
             }
@@ -57,7 +57,7 @@ const List = () => {
     }
 
     const handleEditProduct = (productId) => {
-        navigate(`${PATH_DASHBOARD.general.product.edit}/${productId}`)
+        navigate(`${PATH_DASHBOARD.general.product.root}/${productId}`)
     }
 
     return (

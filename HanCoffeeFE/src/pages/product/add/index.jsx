@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import './Add.css'
 import { assets } from '../../../assets/assets'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 import axiosInstance from '../../../common/library/query'
+import { PATH_DASHBOARD } from '../../../common/routes/path'
 
 const Add = () => {
+    const navigate = useNavigate()
     const [image, setImage] = useState(null)
     const [categories, setCategories] = useState([])
     const [data, setData] = useState({
@@ -82,6 +85,7 @@ const Add = () => {
                     quantity: '', // Reset quantity
                 })
                 setImage(null)
+                handleNavigate()
             } else {
                 toast.error(response.data.message)
             }
@@ -89,6 +93,10 @@ const Add = () => {
             console.error('Error adding product:', error)
             toast.error('Failed to add product')
         }
+    }
+
+    const handleNavigate = () => {
+        navigate(PATH_DASHBOARD.general.product.list)
     }
 
     return (

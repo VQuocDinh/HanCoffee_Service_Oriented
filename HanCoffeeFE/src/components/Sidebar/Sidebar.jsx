@@ -48,6 +48,22 @@ const Sidebar = () => {
                     <img src={assets.user_icon} alt="" />
                     <p>Users</p>
                 </NavLink>
+
+                <NavLink
+                    to={PATH_DASHBOARD.general.staff.list}
+                    className="sidebar-option"
+                >
+                    <img src={assets.user_icon} alt="" />
+                    <p>Staff</p>
+                </NavLink>
+
+                <NavLink
+                    to={PATH_DASHBOARD.general.customer.list}
+                    className="sidebar-option"
+                >
+                    <img src={assets.user_icon} alt="" />
+                    <p>Customer</p>
+                </NavLink>
             </div>
         </div>
     )
