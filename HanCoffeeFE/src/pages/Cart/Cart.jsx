@@ -5,9 +5,48 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext'
+import { ToastContainer, toast, Bounce } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 const Cart = () => {
   const navigate = useNavigate()
-  const { cartItems, removeFromCart,  product_list } = useContext(StoreContext)
+  const { cartItems, removeFromCart, product_list } = useContext(StoreContext)
+  const handleRemoveFromCart = (itemId) => {
+    removeFromCart(itemId)
+      .then(() => {
+        notifySuccess();
+      })
+      .catch(() => {
+        notifyError();
+      });
+  };
+
+  const notifySuccess = () => {
+    toast.success("Remove from cart successfully", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    })
+  }
+
+  const notifyError = () => {
+    toast.error("Add to cart error", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    })
+  }
   return (
     <div className='cart'>
       <div className="cart__item">
@@ -21,8 +60,7 @@ const Cart = () => {
           <h4>Remove</h4>
         </div>
         <hr />
-        {console.log('cartItems',cartItems)}
-        {/* {product_list.map((item, index) => {
+        {product_list.map((item, index) => {
           if (cartItems[item._id] > 0) {
             return (
               <div className="cart__items-item">
@@ -32,12 +70,12 @@ const Cart = () => {
                 <p>{cartItems[item._id]}</p>
                 <p>M</p>
                 <p>${item.price * cartItems[item._id]}</p>
-                <p onClick={()=> removeFromCart(item._id)}><FontAwesomeIcon icon={faTrash} /></p>
+                <p onClick={() => handleRemoveFromCart(item._id)}><FontAwesomeIcon icon={faTrash} /></p>
                 <hr />
               </div>
             )
           }
-        })} */}
+        })}
       </div>
 
       <div className="cart__bottom">
@@ -60,8 +98,10 @@ const Cart = () => {
 
 
       </div>
+      <ToastContainer />
 
     </div>
+
   )
 }
 

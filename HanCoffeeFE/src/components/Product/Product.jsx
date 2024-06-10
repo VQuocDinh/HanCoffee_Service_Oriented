@@ -26,13 +26,16 @@ const Product = () => {
   // handle add product
   const handleAddToCart = async (itemId) => {
     const result = await addToCart(itemId);
+    console.log(result)
+
     if (result) {
-      notifySuccess();
-      handleClose();
+        notifySuccess();
+        handleClose();
     } else {
-      notifyError();
+        notifyError();
     }
 };
+
 
   const notifySuccess = () => {
     toast.success("Add to cart successfully", {
@@ -41,7 +44,7 @@ const Product = () => {
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
-      draggable: true,
+      draggable: true,  
       progress: undefined,
       theme: "light",
       transition: Bounce,

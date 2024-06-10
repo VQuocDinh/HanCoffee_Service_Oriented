@@ -32,10 +32,7 @@ const StoreContextProvider = (props) => {
     const loadCartData = async () => {
         try {
             const cartResponse = await axios.post(`${url}/api/cart/get`, { userId: '6666bb2a4f6f4d27a5b0d600' })
-            console.log('data: ', cartResponse)
-
             setCartItems(cartResponse.data.cartData)
-            console.log('setCartItem: ', setCartItems)
         } catch (error) {
             console.error('Error loading cart data: ', error)
         }
@@ -43,10 +40,22 @@ const StoreContextProvider = (props) => {
 
     const addToCart = async (itemId) => {
         try {
-            await axios.post(`${url}/api/cart/add`, { itemId, userId: '6666bb2a4f6f4d27a5b0d600' });
+            await axios.post(`${url}/api/cart/add`, { itemId, userId: '6666bb2a4f6f4d27a5b0d6' });
+            console.log('Success remove to cart');
             return true;
         } catch (error) {
             console.error('Error adding to cart: ', error);
+            return false;
+        }
+    };
+    
+
+    const removeFromCart = async (itemId) => {
+        try {
+            await axios.post(`${url}/api/cart/remove`, { itemId, userId: '6666bb2a4f6f4d27a5b0d600' });
+            return true;
+        } catch (error) {
+            console.error('Error remove to cart: ', error);
             return false;
         }
     };
@@ -64,6 +73,7 @@ const StoreContextProvider = (props) => {
         product_list,
         category_list,
         addToCart,
+        removeFromCart,
         cartItems
     }
     return (
