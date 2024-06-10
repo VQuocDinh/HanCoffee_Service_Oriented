@@ -1,8 +1,12 @@
 import React from 'react'
 import './PlaceOrder.css'
+<<<<<<< HEAD
+const Order = () => {
+=======
 import { useNavigate } from 'react-router-dom'
 const PLaceOrder = () => {
   const navigate = useNavigate()
+>>>>>>> main
   return (
     <div className='place-order'>
       <div className="place-order__left">

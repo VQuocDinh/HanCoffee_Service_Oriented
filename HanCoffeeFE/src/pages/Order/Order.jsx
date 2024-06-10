@@ -1,9 +1,15 @@
+<<<<<<< HEAD
+import React from 'react'
+import './Order.css'
+const Merchandise = () => {
+=======
 // Order.jsx
 import React from 'react';
 import './Order.scss';
 import {assets} from '../../assets/assets'
  
 const Order = () => {
+>>>>>>> main
   return (
     <div className='order'>
       <div className="order__status">
