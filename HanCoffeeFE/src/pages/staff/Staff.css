@@ -60,7 +60,7 @@ h1 {
 .staff-table-header,
 .staff-table-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     gap: 10px;
     padding: 12px 15px;

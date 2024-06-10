@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 const Users = () => {
     const [users, setUsers] = useState([])
     const [roles, setRoles] = useState([]) // Fetch roles dynamically
+    const [selectedRoles, setSelectedRoles] = useState({}) // Track selected roles
 
     useEffect(() => {
         fetchUsers()
@@ -21,12 +22,18 @@ const Users = () => {
                     (a, b) => a.role - b.role
                 )
                 setUsers(sortedUsers)
+                // Initialize selectedRoles state
+                const initialRoles = {}
+                sortedUsers.forEach((user) => {
+                    initialRoles[user._id] = user.role
+                })
+                setSelectedRoles(initialRoles)
             } else {
-                toast.error('Error fetching customers')
+                toast.error('Error fetching users')
             }
         } catch (error) {
-            console.error('Error fetching customers:', error)
-            toast.error('Failed to fetch customers')
+            console.error('Error fetching users:', error)
+            toast.error('Failed to fetch users')
         }
     }
 
@@ -46,10 +53,18 @@ const Users = () => {
         ])
     }
 
-    const handleRoleChange = async (userId, newRole) => {
+    const handleRoleChange = (userId, newRole) => {
+        setSelectedRoles({
+            ...selectedRoles,
+            [userId]: parseInt(newRole),
+        })
+    }
+
+    const handleUpdateRole = async (userId) => {
+        const newRole = selectedRoles[userId]
         try {
             const response = await axiosInstance.put(`/api/user/${userId}`, {
-                role: parseInt(newRole),
+                role: newRole,
             })
             if (response.data.success) {
                 toast.success('Role updated successfully')
@@ -91,7 +106,7 @@ const Users = () => {
                         </div>
                         <div>
                             <select
-                                value={user.role}
+                                value={selectedRoles[user._id]}
                                 onChange={(e) =>
                                     handleRoleChange(user._id, e.target.value)
                                 }
@@ -104,11 +119,7 @@ const Users = () => {
                             </select>
                         </div>
                         <div>
-                            <button
-                                onClick={() =>
-                                    handleRoleChange(user._id, user.role)
-                                }
-                            >
+                            <button onClick={() => handleUpdateRole(user._id)}>
                                 Update
                             </button>
                         </div>

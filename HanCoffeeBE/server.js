@@ -9,6 +9,7 @@ import cartItemsRouter from './routers/cartItemsRouter.js'
 import staffRouter from './routers/staffRouter.js'
 import userModel from './models/userModel.js'
 import User from './models/userModel.js'
+import customerRouter from './routers/customerRouter.js'
 
 // app connfig
 const app = express()
@@ -27,6 +28,7 @@ app.use("/api/user",userRouter)
 app.use("/api/category",categoryRouter)
 app.use("/api/cartItem", cartItemsRouter)
 app.use("/api/staff", staffRouter)
+app.use("/api/customer", customerRouter)
 app.use("/images", express.static('uploads'))
 
 app.post('/api/user/login', async (req, res) => {
