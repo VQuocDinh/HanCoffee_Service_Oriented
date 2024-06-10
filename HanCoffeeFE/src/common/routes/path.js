@@ -60,11 +60,15 @@ export const PATH_CUSTOMER = {
         productDetail: {
             root: path(ROOT_CUSTOMER, 'productDetail'),
         },
-        order: {
-            root: path(ROOT_CUSTOMER, 'order'),
+        placeOrder: {
+            root: path(ROOT_CUSTOMER, 'placeOrder'),
         },
         user: {
             root: path(ROOT_CUSTOMER, 'user'),
+        },
+
+        order: {
+            root: path(ROOT_CUSTOMER, 'order'),
         },
     },
 }

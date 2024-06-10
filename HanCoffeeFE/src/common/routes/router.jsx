@@ -7,6 +7,7 @@ import Users from '../../pages/Users/Users'
 import Cart from '../../pages/Cart/Cart'
 import ProductDetail from '../../pages/ProductDetail/ProductDetail.jsx'
 import Order from '../../pages/Order/Order.jsx'
+import PlacecOrder from '../../pages/PlaceOrder/PlaceOrder.jsx'
 import User from '../../pages/User/User.jsx'
 import GuessGuard from '../guard/GuessGuard'
 import AuthGuard from '../guard/AuthGuard'
@@ -105,6 +106,16 @@ export const router = createBrowserRouter([
                     {
                         path: PATH_CUSTOMER.general.user.root,
                         element: <User />,
+                    },
+                ],
+            },
+
+            {
+                path: PATH_CUSTOMER.general.placeOrder.root,
+                children: [
+                    {
+                        path: PATH_CUSTOMER.general.placeOrder.root,
+                        element: <PlacecOrder />,
                     },
                 ],
             },

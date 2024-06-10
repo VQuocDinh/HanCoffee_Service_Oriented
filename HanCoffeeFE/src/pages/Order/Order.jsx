@@ -1,80 +1,34 @@
 import React from 'react'
-import './Order.css'
-const Order = () => {
+import './Merchandise.css'
+const Merchandise = () => {
   return (
-    <div className='order'>
-      <div className="order__left">
-        <div className="order__left-delivery">
-          <h2 className="order__left-delivery-title">Delivery Information</h2>
-          <div className="order__left-delivery-type">
-            <input className="delivery__name" placeholder='Name'/>
-            <input className="delivery__phone" placeholder='Phone'/>
-            <input className="delivery__address" placeholder='Address'/>
-          </div>
-        </div>
-
-        <div className="order__left-pay">
-          <h2 className="order__left-pay-title">Payment Methods</h2>
-          <div className="order__left-pay-list">
-            <div className="order__left-pay-list-item">
-              <input type="radio" />
-              <label htmlFor="">Tiền mặt</label>
-            </div>
-
-            <div className="order__left-pay-list-item">
-              <input type="radio" />
-              <label htmlFor="">ZaloPay</label>
-            </div>
-
-            <div className="order__left-pay-list-item">
-              <input type="radio" />
-              <label htmlFor="">MoMo</label>
-            </div>
-
-            <div className="order__left-pay-list-item">
-              <input type="radio" />
-              <label htmlFor="">Ngân hàng</label>
-            </div>
-          </div>
+    <div>
+      <div className="bg-white shadow-md rounded-lg p-4">
+      <div className="flex items-center mb-4">
+        <img
+          src={product.imageUrl}
+          alt={product.name}
+          className="h-20 w-20 object-cover rounded-md mr-4"
+        />
+        <div>
+          <h3 className="text-lg font-semibold">{product.name}</h3>
+          <p className="text-gray-600">{product.description}</p>
         </div>
       </div>
-
-      <div className="order__right">
-        <div className="order__right-product">
-          <h2>Selected Products</h2>
-          <div className="order__right-product-body">
-            <div className="order__right-product-list">
-              <div className="order__right-product-list-item">
-                <span>2 x </span><p>Capuchino</p>
-                <span>M</span>
-                <span>$2</span>
-              </div>
-
-              <div className="order__right-product-list-item">
-                <span>2 x </span><p>Capuchino</p>
-                <span>M</span>
-                <span>$2</span>
-              </div>
-            </div>
-          </div>
+      <div className="flex justify-between items-center">
+        <div>
+          <p className="text-gray-600">Quantity: 1</p>
+          <p className="text-red-500 font-bold">${product.price}</p>
         </div>
-
-        <div className="order__right-price">
-          <div className="order__right-price-delivery">
-            <span>Delivery charges</span><span>$0.12</span>
-          </div>
-        </div>
-
-        <div className="order__right-total">
-          <div className="order__right-total-left">
-            <span>Total </span><span>$0.12</span>
-          </div>
-
-          <button className='order__right-total-btn'>Order</button>
+        <div>
+          <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
+            Buy Now
+          </button>
         </div>
       </div>
+    </div>
     </div>
   )
 }
 
-export default Order
+export default Merchandise
