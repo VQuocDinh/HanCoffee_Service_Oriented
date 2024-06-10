@@ -1,14 +1,8 @@
-import React from 'react';
-import { router } from './common/routes/router.jsx'
-import { RouterProvider, useLocation } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css'
+// import Router from './common/routes/router'
 
 const App = () => {
-  return (
-    <div className='app'>
-      <RouterProvider router={router} />
-    </div>
-  )
+    return <div className="app"></div>
 }
 
 export default App

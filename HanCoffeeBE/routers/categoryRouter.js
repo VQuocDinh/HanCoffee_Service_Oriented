@@ -1,5 +1,5 @@
 import express from 'express';
-import { addCategory, listCategories } from '../controllers/categoryController.js';
+import { addCategory, editCategory, getCategoryById, listCategories, removeCategory } from '../controllers/categoryController.js';
 import multer from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 import { bucket } from './firebase-helper.js';
@@ -64,6 +64,16 @@ categoryRouter.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-categoryRouter.get("/list", listCategories);
+categoryRouter.get("/", listCategories);
+categoryRouter.patch("/:id", removeCategory);
+categoryRouter.put("/:id", upload.single("image"), async (req, res) => {
+  try {
+    await editCategory(req, res); // Gọi hàm editCategory từ controller
+  } catch (err) {
+    console.error("Error editing category:", err);
+    return res.status(500).json({ error: "Unable to edit category" });
+  }
+});
+categoryRouter.get("/:id",getCategoryById)
 
 export default categoryRouter;
