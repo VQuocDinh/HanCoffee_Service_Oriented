@@ -13,13 +13,13 @@ export const PATH_DASHBOARD = {
             root: path(ROOT_DASHBOARD, '/product'),
             add: path(ROOT_DASHBOARD, '/product/add'),
             list: path(ROOT_DASHBOARD, '/product/list'),
-            edit: path(ROOT_DASHBOARD, '/product/:productId'),
+            edit: path(ROOT_DASHBOARD, '/product/edit/:productId'),
         },
         category:{
             root: path(ROOT_DASHBOARD,'/category'),
             add: path(ROOT_DASHBOARD,'/category/add'),
             list: path(ROOT_DASHBOARD,'/category/list'),
-            edit: path(ROOT_DASHBOARD,'/category/:categoryId'),
+            edit: path(ROOT_DASHBOARD,'/category/edit/:categoryId'),
             
         },
         report: {
@@ -34,16 +34,6 @@ export const PATH_DASHBOARD = {
             root: path(ROOT_DASHBOARD, '/user'),
             add: path(ROOT_DASHBOARD, '/user/add'),
             list: path(ROOT_DASHBOARD, '/user/list'),
-        },
-        staff: {
-            root: path(ROOT_DASHBOARD, '/staff'),
-            add: path(ROOT_DASHBOARD, '/staff/add'),
-            list: path(ROOT_DASHBOARD, '/staff/list'),
-        },
-        customer: {
-            root: path(ROOT_DASHBOARD, '/customer'),
-            add: path(ROOT_DASHBOARD, '/customer/add'),
-            list: path(ROOT_DASHBOARD, '/customer/list'),
         },
     },
 }

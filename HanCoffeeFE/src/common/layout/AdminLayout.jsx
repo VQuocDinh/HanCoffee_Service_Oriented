@@ -2,7 +2,7 @@ import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import { Outlet } from 'react-router-dom'
-import NavbarAdmin from '../../components/Navbar/admin/Navbar'
+import NavbarAdmin from '../../components/Navbar/Admin/Navbar'
 
 const AdminLayout = () => {
     return (
@@ -10,7 +10,7 @@ const AdminLayout = () => {
             <ToastContainer />
             <NavbarAdmin />
             <hr />
-            <div className="app-content">
+            <div className="app__content">
                 <Sidebar />
                 <Outlet />
             </div>

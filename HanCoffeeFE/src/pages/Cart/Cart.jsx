@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Cart.css'
 import { assets } from '../../assets/assets'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
+import { StoreContext } from '../../context/StoreContext'
 const Cart = () => {
   const navigate = useNavigate()
+  const { cartItems, removeFromCart,  product_list } = useContext(StoreContext)
   return (
     <div className='cart'>
       <div className="cart__item">
@@ -19,38 +21,23 @@ const Cart = () => {
           <h4>Remove</h4>
         </div>
         <hr />
-        <div className="cart__items-item">
-          <img src={assets.productImg} alt="" className="cart__items-item-img" />
-          <p>Capuchino</p>
-          <p>$2</p>
-          <p>2</p>
-          <p>M</p>
-          <p>$4</p>
-          <p><FontAwesomeIcon icon={faTrash} /></p>
-        </div>
-        <hr />
-
-        <div className="cart__items-item">
-          <img src={assets.productImg} alt="" className="cart__items-item-img" />
-          <p>Capuchino</p>
-          <p>$2</p>
-          <p>2</p>
-          <p>M</p>
-          <p>$4</p>
-          <p><FontAwesomeIcon icon={faTrash} /></p>
-        </div>
-        <hr />
-
-        <div className="cart__items-item">
-          <img src={assets.productImg} alt="" className="cart__items-item-img" />
-          <p>Capuchino</p>
-          <p>$2</p>
-          <p>2</p>
-          <p>M</p>
-          <p>$4</p>
-          <p><FontAwesomeIcon icon={faTrash} /></p>
-        </div>
-        <hr />
+        {console.log('cartItems',cartItems)}
+        {/* {product_list.map((item, index) => {
+          if (cartItems[item._id] > 0) {
+            return (
+              <div className="cart__items-item">
+                <img src={item.image} alt="" className="cart__items-item-img" />
+                <p>{item.name}</p>
+                <p>${item.price}</p>
+                <p>{cartItems[item._id]}</p>
+                <p>M</p>
+                <p>${item.price * cartItems[item._id]}</p>
+                <p onClick={()=> removeFromCart(item._id)}><FontAwesomeIcon icon={faTrash} /></p>
+                <hr />
+              </div>
+            )
+          }
+        })} */}
       </div>
 
       <div className="cart__bottom">
