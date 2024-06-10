@@ -4,8 +4,11 @@ import axiosInstance from '../../../common/library/query'
 import './AddCategory.css'
 import { toast } from 'react-toastify'
 import { assets } from '../../../assets/assets'
+import { useNavigate } from 'react-router-dom'
+import { PATH_DASHBOARD } from '../../../common/routes/path'
 
 const AddCategory = () => {
+    const navigate = useNavigate()
     const [image, setImage] = useState(null)
     const [data, setData] = useState({
         name: '',
@@ -37,6 +40,7 @@ const AddCategory = () => {
                 })
                 setImage(null)
                 toast.success(response.data.message)
+                navigate(PATH_DASHBOARD.general.category.list)
             } else {
                 toast.error(response.data.message)
             }

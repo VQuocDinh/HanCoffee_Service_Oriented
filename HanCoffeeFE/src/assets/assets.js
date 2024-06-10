@@ -13,7 +13,6 @@ import order_icon from './order.png'
 import report_icon from './report.png'
 import user_icon from './users.png'
 import upload_area from './upload-area.png'
-import user_img from './user.jpg'
 
 
 export const assets = {
@@ -30,8 +29,7 @@ export const assets = {
     order_icon,
     report_icon,
     user_icon,
-    upload_area,
-    user_img,
+    upload_area
 
 }
 

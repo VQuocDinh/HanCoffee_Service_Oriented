@@ -10,7 +10,7 @@ const AdminLayout = () => {
             <ToastContainer />
             <NavbarAdmin />
             <hr />
-            <div className="app__content">
+            <div className="app-content">
                 <Sidebar />
                 <Outlet />
             </div>
