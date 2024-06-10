@@ -7,7 +7,6 @@ import 'dotenv/config'
 import categoryRouter from './routers/categoryRouter.js'
 import cartRouter from './routers/cartRouter.js'
 import staffRouter from './routers/staffRouter.js'
-import User from './models/userModel.js'
 import customerRouter from './routers/customerRouter.js'
 
 // app connfig
@@ -28,6 +27,7 @@ app.use("/api/category",categoryRouter)
 app.use("/api/cart", cartRouter)
 app.use("/api/staff", staffRouter)
 app.use("/api/customer", customerRouter)
+app.use("/login",userRouter)
 app.use("/images", express.static('uploads'))
 
 

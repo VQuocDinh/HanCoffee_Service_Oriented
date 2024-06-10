@@ -13,6 +13,7 @@ import AuthGuard from '../guard/AuthGuard'
 import AdminLayout from '../layout/AdminLayout'
 import CustomerLayout from '../layout/CustomerLayout'
 import StoreContextProvider from '../../context/StoreContext.jsx'
+import Login from '../../pages/Login/Login.jsx'
 
 
 
@@ -192,6 +193,12 @@ export const router = createBrowserRouter([
             },
         ],
     },
+    {
+        path: 'login',
+        element: (
+            <Login/>
+        ),
+    }
 ])
 
 
