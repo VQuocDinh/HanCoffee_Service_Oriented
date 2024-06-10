@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from 'react'
 import { createBrowserRouter, useRoutes } from 'react-router-dom'
 import { PATH_CUSTOMER, PATH_DASHBOARD } from './path'
 import Report from '../../pages/Report/Report'
-import Orders from '../../pages/Orders/Orders'
 import Users from '../../pages/Users/Users'
 import Cart from '../../pages/Cart/Cart'
 import ProductDetail from '../../pages/ProductDetail/ProductDetail.jsx'
@@ -174,14 +173,14 @@ export const router = createBrowserRouter([
                 ],
             },
 
-            {
-                children: [
-                    {
-                        path: PATH_DASHBOARD.general.order.list,
-                        element: <Orders />,
-                    },
-                ],
-            },
+            // {
+            //     children: [
+            //         {
+            //             path: PATH_DASHBOARD.general.order.list,
+            //             element: <Orders />,
+            //         },
+            //     ],
+            // },
 
             {
                 children: [

@@ -5,7 +5,7 @@ import productRouter from './routers/productRouter.js'
 import userRouter from './routers/userRouter.js'
 import 'dotenv/config'
 import categoryRouter from './routers/categoryRouter.js'
-import cartItemsRouter from './routers/cartItemsRouter.js'
+import cartRouter from './routers/cartRouter.js'
 
 // app connfig
 const app = express()
@@ -22,7 +22,7 @@ connectDB();
 app.use("/api/product",productRouter)
 app.use("/api/user",userRouter)
 app.use("/api/category",categoryRouter)
-app.use("/api/cartItem", cartItemsRouter)
+app.use("/api/cart", cartRouter)
 app.use("/images", express.static('uploads'))
 
 

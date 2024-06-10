@@ -1,8 +1,9 @@
 import express from 'express'
-import { addToCart, removeFromCart } from '../controllers/cartController';
-import { addToCart,removeFromCart,getCart } from '../controllers/cartController.js';
 import authMiddleware from '../middleware/auth.js';
-const cartRouter = express.Router();
+import { addToCart, removeFromCart, getCart } from '../controllers/cartController.js'
+const cartItemsRouter = express.Router()
+cartItemsRouter.post("/add",addToCart)
+cartItemsRouter.post("/remove",removeFromCart)
+cartItemsRouter.post("/get",getCart)
 
-
-export default cartRouter;
+export default cartItemsRouter;

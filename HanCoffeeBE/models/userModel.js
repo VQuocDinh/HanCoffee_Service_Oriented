@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     phone:{type:String, required:true},
     email:{type:String, required:true,unique:true},
     date:{type:Date,default:Date.now()},
-    role:{type:Number ,required:true}
+    role:{type:Number ,required:true},
+    cartData:{type:Object,default:{}}
 },{minimize:false})
 
 const userModel = mongoose.models.user || mongoose.model("user", userSchema);

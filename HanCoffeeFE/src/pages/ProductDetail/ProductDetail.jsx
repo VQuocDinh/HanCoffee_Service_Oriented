@@ -42,7 +42,7 @@ const ProductDetail = () => {
 
           </div>
 
-          <button onClick={()=> navigate('/order')} className='product__detail-content-buy-btn'>Đặt mua ngay</button>
+          <button onClick={()=> navigate('/placeOrder')} className='product__detail-content-buy-btn'>Đặt mua ngay</button>
 
         </div>
 

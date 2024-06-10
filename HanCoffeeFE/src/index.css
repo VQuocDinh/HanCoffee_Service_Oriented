@@ -29,7 +29,7 @@ body {
 
 }
 
-.app {
+.app__content {
   width: 70%;
   margin: auto;
   padding-top: 150px;
@@ -56,7 +56,6 @@ hr{
   background-color: #a9a9a9;
 }
 .app-content{
-  display:flex ;
 }
 
 .flex-col{
@@ -71,11 +70,30 @@ hr{
 }
 
 .app {
-  width: 70%;
-  margin: auto;
-  padding-top: 150px;
-  background-color: var(--white-color);
+  width: 100%;
+}
 
+/* Đặt màu nền mặc định là trắng */
+.bg-white {
+  background-color: white;
+}
+
+/* Đặt màu nền là xám */
+.bg-gray {
+  background-color: gray;
+}
+
+.btn-main {
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  width: 120px;
+  color: var(--white-color);
+  border-radius: 2px;
+  padding: 10px;
+  background-color: var(--primary-color);
+  text-align: center;
+  
 }
 
 input {

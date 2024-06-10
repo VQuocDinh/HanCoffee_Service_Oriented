@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './NavbarCustomer.css'
+import './Navbar.css'
 import { assets } from '../../../assets/assets'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons'
@@ -7,10 +7,12 @@ import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     const [menu, setMenu] = useState('home')
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
     const navigate = useNavigate()
     return (
         <div className="navbar__customer">
             <div className="navbar__wrap">
+                {/* navbar logo */}
                 <div onClick={() => navigate('/')} className="navbar__logo">
                     <img
                         src={assets.logoBranch}
@@ -19,6 +21,7 @@ const Navbar = () => {
                     />
                 </div>
 
+                {/* navbar menu */}
                 <ul className="navbar__menu">
                     <li
                         onClick={() => setMenu('home')}
@@ -46,7 +49,10 @@ const Navbar = () => {
                     </li>
                 </ul>
 
+                {/* navbar search - cart - login */}
                 <div className="navbav__right">
+
+                    {/* navbar search */}
                     <div className="navbav__right-search">
                         <input
                             type="text"
@@ -71,48 +77,50 @@ const Navbar = () => {
                         </i>
                     </div>
 
-                    <div
-                        onClick={() => navigate('/cart')}
-                        className="navbav__right-cart"
-                    >
+                    {/* navbar cart */}
+                    <div onClick={() => navigate('/cart')} className="navbav__right-cart">
                         <i className="cart__icon">
                             <FontAwesomeIcon icon={faCartShopping} />
                         </i>
                         <span className="cart__number-product">3</span>
                     </div>
 
+                    {/* navbar login */}
                     <div className="navbav__right-user">
-                        <img
-                            src={assets.userImg}
-                            alt=""
-                            className="user__img"
-                        />
-                        <span className="user__name">quốc dinh</span>
-                        <div className="user__select">
-                            <ul className="user__select-list">
-                                <li
-                                    onClick={() => navigate('/user')}
-                                    className="user__select-item"
-                                >
-                                    Tài khoản của tôi
-                                </li>
-                                <li className="user__select-item">Đơn mua</li>
-                                <li className="user__select-item">Đăng xuất</li>
-                            </ul>
-                        </div>
-                    </div>
+                        {isAuthenticated ? (
+                            <>
+                                <img
+                                    src={assets.userImg}
+                                    alt=""
+                                    className="user__img"
+                                />
+                                <span className="user__name">quốc dinh</span>
 
-                    {/* <div className="navbav__right-user-not-active">s
-            <img src={assets.userImg} alt="" className="user__img" />
-            <span className="user__name">Đăng nhập</span>
-            <div className="user__select">
-              <ul className='user__select-list'>
-                <li className='user__select-item'>Tài khoản của tôi</li>
-                <li className='user__select-item'>Đơn mua</li>
-                <li className='user__select-item'>Đăng xuất</li>
-              </ul>
-            </div>
-          </div> */}
+                                {/* login list drop down */}
+                                <div className="user__select">
+                                    <ul className="user__select-list">
+                                        <li
+                                            onClick={() => navigate('/user')}
+                                            className="user__select-item"
+                                        >
+                                            Tài khoản của tôi
+                                        </li>
+                                        <li onClick={()=> navigate('/order')} className="user__select-item">Đơn mua</li>
+                                        <li onClick={()=> setIsAuthenticated(false)} className="user__select-item">Đăng xuất</li>
+                                    </ul>
+                                </div>
+
+                               
+                            </>
+                        ) : (
+                            <>
+                                 <img src={assets.user_img} alt="" className="user__img" />
+                                 <span onClick={()=> setIsAuthenticated(true)} className="user__name">Đăng nhập</span>
+                            </>
+                        )}
+
+
+                    </div>
                 </div>
             </div>
         </div>

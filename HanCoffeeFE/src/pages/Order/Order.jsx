@@ -1,34 +1,78 @@
-import React from 'react'
-import './Merchandise.css'
-const Merchandise = () => {
+// Order.jsx
+import React from 'react';
+import './Order.scss';
+import {assets} from '../../assets/assets'
+ 
+const Order = () => {
   return (
-    <div>
-      <div className="bg-white shadow-md rounded-lg p-4">
-      <div className="flex items-center mb-4">
-        <img
-          src={product.imageUrl}
-          alt={product.name}
-          className="h-20 w-20 object-cover rounded-md mr-4"
-        />
-        <div>
-          <h3 className="text-lg font-semibold">{product.name}</h3>
-          <p className="text-gray-600">{product.description}</p>
-        </div>
+    <div className='order'>
+      <div className="order__status">
+        <ul className="order__status-list">
+          <li className="order__status-item">Chờ xác nhận</li>
+          <li className="order__status-item">Đang vận chuyển</li>
+          <li className="order__status-item">Đã giao</li>
+          <li className="order__status-item">Đã hủy</li>
+        </ul>
+        <hr />
       </div>
-      <div className="flex justify-between items-center">
-        <div>
-          <p className="text-gray-600">Quantity: 1</p>
-          <p className="text-red-500 font-bold">${product.price}</p>
+
+      <div className="order__content">
+        <div className="order__item">
+          <div className="order__item-header">
+            <img className="order__item-img" src={assets.productImg} alt="Product"/>
+            <div className="order__item-infor">
+              <h4 className="order__item-name">Capuchino</h4>
+              <div className="order__item-size">
+                <span>Size</span>
+                <span>L</span>
+              </div>
+              <div className="order__item-quantity">
+                <span>x</span>
+                <span>1</span>
+              </div>
+            </div>
+            <div className="order__item-price">$2</div>
+          </div>
+          <hr />
+
+          <div className="order__item-footer">
+            <div className="order__total">
+              <span>Thành tiền</span>
+              <span>$2</span>
+            </div>
+            <button className="order__cancel-button">Hủy đơn</button>
+          </div>
         </div>
-        <div>
-          <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
-            Buy Now
-          </button>
+
+        <div className="order__item">
+          <div className="order__item-header">
+            <img className="order__item-img" src={assets.productImg} alt="Product"/>
+            <div className="order__item-infor">
+              <h4 className="order__item-name">Capuchino</h4>
+              <div className="order__item-size">
+                <span>Size</span>
+                <span>L</span>
+              </div>
+              <div className="order__item-quantity">
+                <span>x</span>
+                <span>1</span>
+              </div>
+            </div>
+            <div className="order__item-price">$2</div>
+          </div>
+          <hr />
+
+          <div className="order__item-footer">
+            <div className="order__total">
+              <span>Thành tiền</span>
+              <span>$2</span>
+            </div>
+            <button className="order__cancel-button">Hủy đơn</button>
+          </div>
         </div>
       </div>
     </div>
-    </div>
-  )
+  );
 }
 
-export default Merchandise
+export default Order;
