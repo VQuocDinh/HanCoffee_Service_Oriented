@@ -1,6 +1,5 @@
 {
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.5.2"
-    "firebase-admin": "^12.1.1"
   }
 }

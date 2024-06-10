@@ -1,5 +1,5 @@
 import React from 'react'
-import './Order.css'
+import './PlaceOrder.css'
 const Order = () => {
   return (
     <div className='order'>
