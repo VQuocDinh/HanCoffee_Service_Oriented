@@ -1,0 +1,115 @@
+.place-order {
+    /* margin-top: 150px; */
+    display: flex;
+    gap: 80px;
+}
+
+.place-order__left {}
+
+.place-order__left-delivery {
+    margin-bottom: 80px;
+
+}
+
+.place-order__left-delivery-title {
+    margin-bottom: 20px;
+
+}
+
+.place-order__left-delivery-type {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 500px;
+
+
+}
+
+.place-order__left-delivery-type>input {
+    padding: 8px;
+
+
+}
+
+
+.place-order__left-pay {}
+
+.place-order__left-pay-title {
+    margin-bottom: 20px;
+
+}
+
+.place-order__left-pay-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.place-order__left-pay-list-item>input {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.place-order__right {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    box-shadow: 0 0 20px #ccc;
+    border-radius: 2px;
+
+}
+
+.place-order__right-product {
+    padding: 8px;
+
+}
+
+.place-order__right-product>h2 {
+    margin-bottom: 20px;
+
+
+}
+
+.place-order__right-product-body {}
+
+.place-order__right-product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+
+}
+
+.place-order__right-product-list-item {}
+
+.place-order__right-price {
+    margin-top: auto;
+    padding: 8px;
+
+}
+
+.place-order__right-price-delivery {}
+
+.place-order__right-total {
+    margin-top: auto;
+    padding: 8px;
+    display: flex;
+    background-color: var(--primary-color);
+    color: white;
+    align-items: center;
+    border-radius: 2px;
+}
+
+.place-order__right-total-left {}
+
+.place-order__right-total-btn {
+    margin-left: auto;
+    width: 20%;
+    background-color: var(--white-color);
+    border: none;
+    cursor: pointer;
+    color: var(--primary-color);
+    padding: 8px 0;
+    border-radius: 2px;
+}
