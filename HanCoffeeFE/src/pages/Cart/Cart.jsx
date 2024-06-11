@@ -10,9 +10,13 @@ import 'react-toastify/dist/ReactToastify.css';
 const Cart = () => {
   const navigate = useNavigate()
   const { cartItems, removeFromCart, product_list } = useContext(StoreContext)
-  const handleRemoveFromCart = (itemId) => {
-    removeFromCart(itemId)
-    notifySuccess()
+  const handleRemoveFromCart = async (itemId) => {
+    const result = await removeFromCart(itemId)
+    if (result) {
+      notifySuccess()
+    } else {
+      notifyError()
+    }
   }
 
   const notifySuccess = () => {

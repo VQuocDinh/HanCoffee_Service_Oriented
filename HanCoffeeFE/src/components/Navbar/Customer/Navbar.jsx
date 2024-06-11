@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './Navbar.css'
 import { assets } from '../../../assets/assets'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
+import { StoreContext } from '../../../context/StoreContext'
 
 const Navbar = () => {
     const [menu, setMenu] = useState('home')
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const navigate = useNavigate()
+    const {cartItems} = useContext(StoreContext)
+    // const totalCartItems = Object.values(cartItems).reduce((acc, count) => acc + count, 0);
+    // console.log('totalCartItems: ', totalCartItems)
+
     return (
         <div className="navbar__customer">
             <div className="navbar__wrap">

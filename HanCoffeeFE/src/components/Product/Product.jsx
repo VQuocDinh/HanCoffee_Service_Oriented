@@ -30,6 +30,7 @@ const Product = () => {
       notifySuccess();
       handleClose();
     } else {
+      handleClose();
       notifyError();
     }
 };

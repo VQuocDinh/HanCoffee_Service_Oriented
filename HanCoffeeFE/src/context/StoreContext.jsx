@@ -33,6 +33,7 @@ const StoreContextProvider = (props) => {
         try {
             const cartResponse = await axios.post(`${url}/api/cart/get`, { userId: '6666bb2a4f6f4d27a5b0d600' })
             setCartItems(cartResponse.data.cartData)
+            // console.log('cartData', cartResponse.data.cartData)
         } catch (error) {
             console.error('Error loading cart data: ', error)
         }
@@ -40,8 +41,15 @@ const StoreContextProvider = (props) => {
 
     const addToCart = async (itemId) => {
         try {
-            await axios.post(`${url}/api/cart/add`, { itemId, userId: '6666bb2a4f6f4d27a5b0d600' });
-            return true;
+            const addResponse = await axios.post(`${url}/api/cart/add`, { itemId, userId: '6666bb2a4f6f4d27a5b0d600' });
+            if (addResponse.data.success) {
+                setCartItems((prevCartItems) => ({
+                    ...prevCartItems,
+                    [itemId]: (prevCartItems[itemId] || 0) + 1
+                }));
+                return true;
+            }
+            
         } catch (error) {
             console.error('Error adding to cart: ', error);
             return false;
@@ -50,19 +58,33 @@ const StoreContextProvider = (props) => {
 
     const removeFromCart = async (itemId) => {
         try {
-            await axios.post(`${url}/api/cart/remove`, { itemId, userId: '6666bb2a4f6f4d27a5b0d600' });
-            return true;
+            const response = await axios.post(`${url}/api/cart/remove`, { itemId, userId: '6666bb2a4f6f4d27a5b0d600' });
+            
+            if (response.data.success) {
+                setCartItems((prevCartItems) => {
+                    const updatedCartItems = { ...prevCartItems };
+                    if (updatedCartItems[itemId] > 1) {
+                        updatedCartItems[itemId] -= 1;
+                    } else {
+                        delete updatedCartItems[itemId];
+                    }
+                    return updatedCartItems;
+                });
+                return true;
+            }
         } catch (error) {
-            console.error('Error remove to cart: ', error);
+            console.error('Error removing from cart: ', error);
             return false;
         }
     };
+    
 
     useEffect(() => {
         const loadData = async () => {
             await fetchProductList();
             await fetchCategoryList();
             await loadCartData();
+            console.log('loadCartData')
         };
         loadData();
     }, [])
