@@ -17,6 +17,7 @@ import StoreContextProvider from '../../context/StoreContext.jsx'
 import Staff from '../../pages/staff/Staff.jsx'
 import Login from '../../pages/Login/Login.jsx'
 import Customer from '../../pages/customer/Customer.jsx'
+import ForgotPassword from '../../pages/Login/ForgotPassword.jsx'
 
 const Loadable = (Component) => (props) => {
     // const { pathname } = useLocation();
@@ -212,8 +213,12 @@ export const router = createBrowserRouter([
     {
         path: 'login',
         element: (
-            <Login/>
+            <Login />
         ),
+    },
+    {
+        path: 'forgot-password',
+        element: <ForgotPassword />,
     }
 ])
 

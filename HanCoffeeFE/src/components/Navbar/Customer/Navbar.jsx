@@ -8,8 +8,14 @@ import { StoreContext } from '../../../context/StoreContext'
 
 const Navbar = () => {
     const [menu, setMenu] = useState('home')
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    // const [isAuthenticated, setIsAuthenticated] = useState(false)
     const navigate = useNavigate()
+    const { token, setToken, itemTotal } = useContext(StoreContext)
+    const logout = ()=> {
+        localStorage.removeItem("token")
+        setToken("")
+        navigate('/')
+    }
     const { cartItems } = useContext(StoreContext)
     // const totalCartItems = Object.values(cartItems).reduce((acc, count) => acc + count, 0);
     // console.log('totalCartItems: ', totalCartItems)
@@ -83,23 +89,34 @@ const Navbar = () => {
                     </div>
 
                     {/* navbar cart */}
-                    <div onClick={() => navigate('/cart')} className="navbav__right-cart">
+                    <a onClick={()=> navigate('/cart')} className="navbav__right-cart">
                         <i className="cart__icon">
                             <FontAwesomeIcon icon={faCartShopping} />
                         </i>
-                        <span className="cart__number-product">3</span>
-                    </div>
+                        <span className="cart__number-product">{itemTotal}</span>
+                    </a>
 
                     {/* navbar login */}
                     <div className="navbav__right-user">
-                        {isAuthenticated ? (
+                        {!token ? (
+                            <>
+                                <img src={assets.userImg} alt="" className="user__img" />
+                                <span onClick={() => {
+                                    navigate('/login')
+                                    // setIsAuthenticated(true)
+                                }} className="user__name">Đăng nhập</span>
+
+
+
+                            </>
+                        ) : (
                             <>
                                 <img
-                                    src={assets.userImg}
+                                    src={assets.userActive}
                                     alt=""
                                     className="user__img"
                                 />
-                                <span className="user__name">quốc dinh</span>
+                                {/* <span className="user__name">quốc dinh</span> */}
 
                                 {/* login list drop down */}
                                 <div className="user__select">
@@ -111,19 +128,9 @@ const Navbar = () => {
                                             Tài khoản của tôi
                                         </li>
                                         <li onClick={() => navigate('/order')} className="user__select-item">Đơn mua</li>
-                                        <li onClick={() => setIsAuthenticated(false)} className="user__select-item">Đăng xuất</li>
+                                        <li onClick={logout} className="user__select-item">Đăng xuất</li>
                                     </ul>
                                 </div>
-
-
-                            </>
-                        ) : (
-                            <>
-                                <img src={assets.user_img} alt="" className="user__img" />
-                                <span onClick={() => {
-                                    navigate('/login')
-                                    // setIsAuthenticated(true)
-                                }} className="user__name">Đăng nhập</span>
                             </>
                         )}
 

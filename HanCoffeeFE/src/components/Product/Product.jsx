@@ -83,7 +83,7 @@ const Product = ({category}) => {
                   </div>
                   <div className="item__content-price">
                     <span>
-                      ${item.price}
+                      {item.price} VND
                     </span>
                   </div>
   

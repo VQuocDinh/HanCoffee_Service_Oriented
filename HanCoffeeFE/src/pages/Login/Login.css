@@ -7,15 +7,14 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-body{
-    background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+.wrap {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     min-height: 100vh;
 }
+
 
 .container{
     background-color: #fff;
@@ -212,3 +211,66 @@ body{
 .container.active .toggle-right{
     transform: translateX(200%);
 }
+
+.form-forgot { 
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .form-forgot h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #8B0305;
+  }
+  
+  .form-forgot input[type="email"] {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .form-forgot input[type="email"]:focus {
+    border-color: #66afe9;
+  }
+  
+  .form-forgot button[type="submit"] {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #8B0305;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .form-forgot button[type="submit"]:hover {
+    background-color: #2980b9;
+  }
+  
+  .form-forgot p {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .form-forgot p.success {
+    color: green;
+  }
+  
+  .form-forgot p.error {
+    color: red;
+  }

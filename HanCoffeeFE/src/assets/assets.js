@@ -1,5 +1,5 @@
 import coffeeImg from './coffee.jpg';
-import userImg from './user.png'
+import userImg from './user.jpg'
 import logoBranch from './hancoffee-logo.png'
 import productImg from './juice.jpg'
 import downloadLink from './downloadApp.png'
@@ -13,6 +13,8 @@ import order_icon from './order.png'
 import report_icon from './report.png'
 import user_icon from './users.png'
 import upload_area from './upload-area.png'
+import userActive from './userActive.png'
+import cartEmpty from './cart-empty.png'
 
 
 export const assets = {
@@ -29,7 +31,9 @@ export const assets = {
     order_icon,
     report_icon,
     user_icon,
-    upload_area
+    upload_area,
+    userActive,
+    cartEmpty
 
 }
 

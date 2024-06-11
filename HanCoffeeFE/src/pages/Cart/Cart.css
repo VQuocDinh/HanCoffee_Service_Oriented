@@ -1,8 +1,9 @@
 .cart {
-    margin-top: 150px;
 
 }
-
+.cart__empty-img{
+    
+}
 .cart__items-title{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;

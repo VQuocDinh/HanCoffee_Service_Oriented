@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
 
 
-const orderSchema = new mongoose.OrderSchema({
+const orderSchema = new mongoose.Schema({
     date:{type:Date,default:Date.now()},
-    id:{type:String ,required:true},
-    idCategory:{type:String,required:true},
+    status:{type:String,default:"confirm"},
     idUser:{type:String ,required:true},
-    price:{type:Number ,required:true}
+    totalPrice:{type:Number ,required:true},
+    items:{type:Array,required:true},
+    // address:{type:Object, required:true},
 })
 
 const orderModel = mongoose.models.order || mongoose.model("order", orderSchema);
