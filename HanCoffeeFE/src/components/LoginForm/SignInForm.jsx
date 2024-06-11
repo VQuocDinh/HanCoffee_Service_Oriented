@@ -47,8 +47,8 @@ const SignInForm = () => {
           <a href="#" className="icon"><FontAwesomeIcon icon={faLinkedinIn} /></a>
         </div>
         <span>Đăng nhập bằng email</span>
-        <input type="email" placeholder="Nhập email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Nhập mật khẩu" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="email" placeholder="Nhập email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="password" placeholder="Nhập mật khẩu" value={password} onChange={(e) => setPassword(e.target.value)} required />
         <a href="#">Bạn quên mật khẩu?</a>
         <button type="submit">Đăng nhập</button>
       </form>
