@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './Product.scss'
 import Modal from 'react-modal';
 
-const Product = () => {
+const Product = ({category}) => {
   // declare hook need to be used
   const navigate = useNavigate();
   const { product_list, addToCart } = useContext(StoreContext)
@@ -70,31 +70,34 @@ const Product = () => {
 
       <div className="product__list">
         {product_list.map((item, index) => {
-          return (
+          if (category ==="All" || category === item.idCategory){
+            return (
 
-            <div onClick={() => navigate('/productDetail')} className="product__list-item">
-              <img src={item.image} alt="" className="item-img" />
-              <div className="item__content">
-                <div className="item__content-name">
-                  <p>
-                    {item.name}
-                  </p>
+              <div onClick={() => navigate('/productDetail')} className="product__list-item">
+                <img src={item.image} alt="" className="item-img" />
+                <div className="item__content">
+                  <div className="item__content-name">
+                    <p>
+                      {item.name}
+                    </p>
+                  </div>
+                  <div className="item__content-price">
+                    <span>
+                      ${item.price}
+                    </span>
+                  </div>
+  
+  
                 </div>
-                <div className="item__content-price">
-                  <span>
-                    ${item.price}
-                  </span>
+  
+                <div onClick={(event) => handleOpen(item, event)} className="item__content-add-cart">
+                  <FontAwesomeIcon icon={faPlusCircle} />
+  
                 </div>
-
-
               </div>
-
-              <div onClick={(event) => handleOpen(item, event)} className="item__content-add-cart">
-                <FontAwesomeIcon icon={faPlusCircle} />
-
-              </div>
-            </div>
-          )
+            )
+          }
+          
         })}
       </div>
       <ToastContainer />

@@ -1,29 +1,3 @@
-// import React from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faFacebook, faFacebookF, faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
-
-// const SignInForm = () => {
-//   return (
-//     <div className="form-container sign-in">
-//       <form>
-//         <h1>Đăng nhập</h1>
-//         <div className="social-icons">
-//           <a href="#" className="icon"><FontAwesomeIcon icon={faFacebook} /></a>
-//           <a href="#" className="icon"><FontAwesomeIcon icon={faFacebookF} /></a>
-//           <a href="#" className="icon"><FontAwesomeIcon icon={faGithub} /></a>
-//           <a href="#" className="icon"><FontAwesomeIcon icon={faLinkedinIn} /></a>
-//         </div>
-//         <span>Đăng nhập bằng email</span>
-//         <input type="email" placeholder="Nhập email" />
-//         <input type="password" placeholder="Nhập mật khẩu" />
-//         <a href="#">Bạn quên mật khẩu?</a>
-//         <button>Đăng nhập</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default SignInForm;
 
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -48,13 +22,11 @@ const SignInForm = () => {
         // Save token to local storage
         localStorage.setItem('token', token);
         // Navigate based on user role
-        if (user && user.role === 0) {
-          navigate(ROOT_DASHBOARD);
-        } else if (user && user.role === 2) {
+        if (user && user.role === 2) {
           navigate(ROOT_CUSTOMER);
-        } else if (user && user.role === 1) {
+        } else if (user && user.role === 1 || user && user.role === 0) {
           navigate(ROOT_DASHBOARD);
-        }else {
+        } else {
           console.error('User role is undefined or invalid');
         }
       } else {

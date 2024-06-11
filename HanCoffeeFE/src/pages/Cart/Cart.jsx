@@ -91,7 +91,7 @@ const Cart = () => {
             <span>$4</span>
           </div>
 
-          <button onClick={() => navigate('/pay')} className="cart__bottom-order-btn">Order</button>
+          <button onClick={() => navigate('/placeOrder')} className="cart__bottom-order-btn">Order</button>
 
         </div>
 

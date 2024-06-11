@@ -2,9 +2,9 @@ function path(root, subLink) {
     return `${root}${subLink}`
 }
 
-const ROOT_AUTH = '/auth'
 export const ROOT_DASHBOARD = '/dashboard'
 export const ROOT_CUSTOMER = '/'
+export const ROOT_LOGIN = '/login'
 
 export const PATH_DASHBOARD = {
     root: ROOT_DASHBOARD,
@@ -71,4 +71,13 @@ export const PATH_CUSTOMER = {
             root: path(ROOT_CUSTOMER, 'order'),
         },
     },
+}
+
+export const PATH_LOGIN ={
+    root: ROOT_LOGIN,
+    general: {
+        login: {
+            root: path(ROOT_LOGIN, 'login'),
+        },
+    }
 }

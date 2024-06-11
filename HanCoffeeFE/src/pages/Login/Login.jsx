@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import SignUpForm from '../../components/Login/SignUpForm';
-import SignInForm from '../../components/Login/SignInForm';
-import Toggle from '../../components/Login/Toggle';
+import SignUpForm from '../../components/LoginForm/SignUpForm';
+import SignInForm from '../../components/LoginForm/SignInForm';
+import Toggle from '../../components/LoginForm/Toggle';
 import './Login.css';
 
 const Login = () => {

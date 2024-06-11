@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { createBrowserRouter, useRoutes } from 'react-router-dom'
-import { PATH_CUSTOMER, PATH_DASHBOARD } from './path'
+import { PATH_CUSTOMER, PATH_DASHBOARD, PATH_LOGIN } from './path'
 import Report from '../../pages/Report/Report'
 import Orders from '../../pages/orderStatus/Orders.jsx'
 import Users from '../../pages/Users/Users'

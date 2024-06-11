@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './Login.css';
+import '../../pages/Login/Login.css';
 
 const Toggle = ({ onRegisterClick, onLoginClick }) => {
   

@@ -10,7 +10,7 @@ const Navbar = () => {
     const [menu, setMenu] = useState('home')
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const navigate = useNavigate()
-    const {cartItems} = useContext(StoreContext)
+    const { cartItems } = useContext(StoreContext)
     // const totalCartItems = Object.values(cartItems).reduce((acc, count) => acc + count, 0);
     // console.log('totalCartItems: ', totalCartItems)
 
@@ -110,17 +110,20 @@ const Navbar = () => {
                                         >
                                             Tài khoản của tôi
                                         </li>
-                                        <li onClick={()=> navigate('/order')} className="user__select-item">Đơn mua</li>
-                                        <li onClick={()=> setIsAuthenticated(false)} className="user__select-item">Đăng xuất</li>
+                                        <li onClick={() => navigate('/order')} className="user__select-item">Đơn mua</li>
+                                        <li onClick={() => setIsAuthenticated(false)} className="user__select-item">Đăng xuất</li>
                                     </ul>
                                 </div>
 
-                               
+
                             </>
                         ) : (
                             <>
-                                 <img src={assets.user_img} alt="" className="user__img" />
-                                 <span onClick={()=> setIsAuthenticated(true)} className="user__name">Đăng nhập</span>
+                                <img src={assets.user_img} alt="" className="user__img" />
+                                <span onClick={() => {
+                                    navigate('/login')
+                                    // setIsAuthenticated(true)
+                                }} className="user__name">Đăng nhập</span>
                             </>
                         )}
 

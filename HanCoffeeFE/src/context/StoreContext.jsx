@@ -84,7 +84,6 @@ const StoreContextProvider = (props) => {
             await fetchProductList();
             await fetchCategoryList();
             await loadCartData();
-            console.log('loadCartData')
         };
         loadData();
     }, [])

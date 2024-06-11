@@ -1,6 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import './PlaceOrder.css'
 const Order = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className='order'>
       <div className="order__left">
@@ -70,7 +73,7 @@ const Order = () => {
             <span>Total </span><span>$0.12</span>
           </div>
 
-          <button className='order__right-total-btn'>Order</button>
+          <button onClick={()=> navigate('/order')} className='order__right-total-btn'>Order</button>
         </div>
       </div>
     </div>
