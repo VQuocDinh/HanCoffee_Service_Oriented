@@ -69,6 +69,7 @@ productRouter.post("/", upload.single("image"), async (req, res) => {
 });
 
 productRouter.get("/", listProducts);
+productRouter.get("/list", listProducts);
 productRouter.patch("/:id", removeProduct);
 productRouter.put("/:id", upload.single("image"), async (req, res) => {
   try {

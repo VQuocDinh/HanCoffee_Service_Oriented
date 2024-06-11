@@ -1,19 +1,21 @@
 import React, { useContext, useState } from 'react'
-import './Product.scss'
 import { StoreContext } from '../../context/StoreContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast, Bounce } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import './Product.scss'
 import Modal from 'react-modal';
 
 const Product = () => {
-
-  const url = "http://localhost:8888"
+  // declare hook need to be used
   const navigate = useNavigate();
-  const { product_list } = useContext(StoreContext)
+  const { product_list, addToCart } = useContext(StoreContext)
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const [showModal, setShowModal] = useState(false)
+
+  // open/close modal product detail
   const handleClose = () => setShowModal(false);
   const handleOpen = (product, event) => {
     event.stopPropagation()
@@ -21,13 +23,33 @@ const Product = () => {
     setShowModal(true)
   };
 
-  const addProductToCart = () => {
-    notify()
-    handleClose()
-  }
-  const [selectedProduct, setSelectedProduct] = useState(null)
-  const notify = () => {
+  // handle add product
+  const handleAddToCart = async (itemId) => {
+    const result = await addToCart(itemId);
+    if (result) {
+      notifySuccess();
+      handleClose();
+    } else {
+      notifyError();
+    }
+};
+
+  const notifySuccess = () => {
     toast.success("Add to cart successfully", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    })
+  }
+
+  const notifyError = () => {
+    toast.error("Add to cart error", {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: true,
@@ -50,7 +72,7 @@ const Product = () => {
           return (
 
             <div onClick={() => navigate('/productDetail')} className="product__list-item">
-              <img src={url + "/images/" + item.image} alt="" className="item-img" />
+              <img src={item.image} alt="" className="item-img" />
               <div className="item__content">
                 <div className="item__content-name">
                   <p>
@@ -85,14 +107,14 @@ const Product = () => {
       >
         <div className="product_modal-header">
           <p>Thêm sản phẩm vào giỏ hàng</p>
-          <i onClick={handleClose}>
+          <i onClick={handleClose} className='product__modal-close'>
             <FontAwesomeIcon icon={faClose} />
           </i>
         </div>
 
         {selectedProduct && (
           <div className='product_modal-body'>
-            <img src={`${url}/images/${selectedProduct.image}`} alt="" className="product_modal-body-img" />
+            <img src={selectedProduct.image} alt="" className="product_modal-body-img" />
             <h3 className='product_modal-body-name'>{selectedProduct.name}</h3>
             <div className="product__detail-content-desc">
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur sint repudiandae, asperiores nobis veritatis autem omnis fugiat id quo, eum consectetur ex quis necessitatibus accusantium. Asperiores libero sapiente iste architecto.</p>
@@ -107,13 +129,13 @@ const Product = () => {
             </div>
             <div className="product_modal-body-quantity">
               <span>Số lượng</span>
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
+              <input className='product__modal-input-quantity' type="Number" />
 
             </div>
             <p className='product_modal-body-price'>${selectedProduct.price}</p>
-            <button onClick={addProductToCart} className='product_modal-body-add'>Thêm</button>
+            <button onClick={() => {
+              handleAddToCart(selectedProduct._id)
+            }} className='product_modal-body-add btn-main'>Thêm</button>
           </div>
         )}
 

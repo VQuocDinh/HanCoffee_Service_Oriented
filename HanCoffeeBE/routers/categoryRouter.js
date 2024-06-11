@@ -65,6 +65,7 @@ categoryRouter.post("/", upload.single("image"), async (req, res) => {
 });
 
 categoryRouter.get("/", listCategories);
+categoryRouter.get("/list", listCategories);
 categoryRouter.patch("/:id", removeCategory);
 categoryRouter.put("/:id", upload.single("image"), async (req, res) => {
   try {

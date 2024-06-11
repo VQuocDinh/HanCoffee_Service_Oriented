@@ -16,8 +16,8 @@ const Menu = () => {
       <div className="menu__list">
         {category_list.map((item, index) => {
           return (
-            <div onClick={() => setCategory(prev => prev === item.name ? 'All' : item.name)} key={index} className="menu__list-item">
-              <img src={url + "/images/" + item.image} alt="Menu image" className="menu__list-item-img" />
+            <div onClick={() => setCategory(prev => prev === item.category ? 'All' : item.category)} key={index} className="menu__list-item">
+              <img src={ item.image} alt="Menu image" className="menu__list-item-img" />
               <h3 className={category === item.name ? "menu__list-item-name active" : "menu__list-item-name"}>{item.name}</h3>
             </div>
           )
