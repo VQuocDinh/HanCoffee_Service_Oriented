@@ -43,26 +43,26 @@
             android:value="AIzaSyCpHpXxdhv7kP2vnkNE0tHH95d5CuxZekE" />
 
         <activity
-            android:name=".Activity.Map.MapsActivity"
+            android:name=".Controller.Activity.Map.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".Activity.Admin.BillAdmin"
+            android:name=".Controller.Activity.Admin.BillAdmin"
             android:exported="false" />
         <activity
-            android:name=".Activity.User.PersonInformation.MainPersonInformationActivity"
+            android:name=".Controller.Activity.User.PersonInformation.MainPersonInformationActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.Auth.ForgotPassword"
+            android:name=".Controller.Activity.Auth.ForgotPassword"
             android:exported="true" />
         <activity
-            android:name=".Activity.Auth.Signup"
+            android:name=".Controller.Activity.Auth.Signup"
             android:exported="true" />
         <activity
-            android:name=".Activity.Auth.OTPSignup"
+            android:name=".Controller.Activity.Auth.OTPSignup"
             android:exported="true" />
         <activity
-            android:name=".Activity.Auth.OTPLogin"
+            android:name=".Controller.Activity.Auth.OTPLogin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,7 +71,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.Auth.Login"
+            android:name=".Controller.Activity.Auth.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -80,7 +80,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.Auth.Home"
+            android:name=".Controller.Activity.Auth.Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -89,17 +89,13 @@
             </intent-filter>
         </activity>
 
-<!--        <meta-data-->
-<!--            android:name="com.google.android.geo.API_KEY_MAP"-->
-<!--            android:value="AIzaSyAoYDdZNhBW_tcyBi8mTYUSfNXKkU5SH-w" />-->
-
         <activity
-            android:name=".Activity.Admin.MainAdminActivity"
+            android:name=".Controller.Activity.Admin.MainAdminActivity"
             android:exported="true"
             android:label="@string/title_activity_main_admin"
             android:theme="@style/Base.Theme.HanCafe" />
         <activity
-            android:name=".Activity.User.MainActivity"
+            android:name=".Controller.Activity.User.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -108,12 +104,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.User.Orders" />
-        <activity android:name=".Activity.User.Bill" />
-        <activity android:name=".Activity.User.CategoryDetail" />
-        <activity android:name=".Activity.User.ProductDetail" />
+        <activity android:name=".Controller.Activity.User.Orders" />
+        <activity android:name=".Controller.Activity.User.Bill" />
+        <activity android:name=".Controller.Activity.User.CategoryDetail" />
+        <activity android:name=".Controller.Activity.User.ProductDetail" />
         <activity
-            android:name=".Activity.User.Pay"
+            android:name=".Controller.Activity.User.Pay"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>

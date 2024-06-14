@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const orderSchema = new mongoose.Schema({
     date:{type:Date,default:Date.now()},
     status:{type:String,default:"confirm"},
-    idUser:{type:String ,required:true},
+    userId:{type:String ,required:true},
     totalPrice:{type:Number ,required:true},
     items:{type:Array,required:true},
     // address:{type:Object, required:true},

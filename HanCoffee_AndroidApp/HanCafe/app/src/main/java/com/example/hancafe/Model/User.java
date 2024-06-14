@@ -1,32 +1,54 @@
 package com.example.hancafe.Model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class User {
+    @SerializedName("_id")
     String id;
+    @SerializedName("email")
     String email;
+    @SerializedName("password")
+    String password;
+    @SerializedName("name")
     String name;
+    @SerializedName("createdAt")
     String date;
+    @SerializedName("phone")
     String phone;
+    @SerializedName("address")
     String address;
+    @SerializedName("avatar")
+    String imgAvt;
+    @SerializedName("role")
     int role;
+    @SerializedName("cartData")
+    CartData cartData;
 
     public User() {
     }
 
-    public User(String id, String email, String name, String date, String phone, String address, int role) {
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String id, String email, String password, String name, String date, String phone, String address, String imgAvt, int role, CartData cartData) {
         this.id = id;
         this.email = email;
+        this.password = password;
         this.name = name;
         this.date = date;
         this.phone = phone;
         this.address = address;
+        this.imgAvt = imgAvt;
         this.role = role;
+        this.cartData = cartData;
     }
-
 
     public String getId() {
         return id;
@@ -42,6 +64,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -76,6 +106,14 @@ public class User {
         this.address = address;
     }
 
+    public String getImgAvt() {
+        return imgAvt;
+    }
+
+    public void setImgAvt(String imgAvt) {
+        this.imgAvt = imgAvt;
+    }
+
     public int getRole() {
         return role;
     }
@@ -84,4 +122,11 @@ public class User {
         this.role = role;
     }
 
+    public CartData getCartData() {
+        return cartData;
+    }
+
+    public void setCartData(CartData cartData) {
+        this.cartData = cartData;
+    }
 }

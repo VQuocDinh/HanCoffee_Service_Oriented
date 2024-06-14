@@ -25,19 +25,21 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div className="form-forgot">
-            <form onSubmit={handleSubmit}>
-                <h1>Quên Mật Khẩu</h1>
-                <input 
-                    type="email" 
-                    placeholder="Nhập email" 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
-                    required 
-                />
-                <button type="submit">Gửi Mật Khẩu Mới</button>
-                {message && <p>{message}</p>}
-            </form>
+        <div className='wrap'>
+            <div className="form-forgot">
+                <form onSubmit={handleSubmit}>
+                    <h1>Quên Mật Khẩu</h1>
+                    <input 
+                        type="email" 
+                        placeholder="Nhập email" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                        required 
+                    />
+                    <button type="submit">Gửi Mật Khẩu Mới</button>
+                    {message && <p>{message}</p>}
+                </form>
+            </div>
         </div>
     );
 };

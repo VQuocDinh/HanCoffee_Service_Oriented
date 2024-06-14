@@ -79,10 +79,10 @@ const Users = () => {
     }
 
     return (
-        <div className="customers-container">
+        <div className="users-container">
             <h1>Users Management</h1>
-            <div className="customers-table">
-                <div className="customers-table-header">
+            <div className="users-table">
+                <div className="users-table-header">
                     <div>Username</div>
                     <div>Phone</div>
                     <div>Account Created</div>
@@ -91,18 +91,22 @@ const Users = () => {
                     <div>Update</div>
                 </div>
                 {users.map((user) => (
-                    <div key={user._id} className="customers-table-row">
+                    <div key={user._id} className="users-table-row">
                         <div>{user.email}</div>
-                        <div>{user.phone}</div>
+                        <div>{user.phone || 'Chưa cập nhật'}</div>
                         <div>
                             {new Date(user.createdAt).toLocaleDateString()}
                         </div>
                         <div>
-                            <img
-                                className="customer-img"
-                                src={user.image}
-                                alt={user.username}
-                            />
+                            {user.image ? (
+                                <img
+                                    className="user-img"
+                                    src={user.image}
+                                    alt={user.username}
+                                />
+                            ) : (
+                                'Chưa cập nhật'
+                            )}
                         </div>
                         <div>
                             <select

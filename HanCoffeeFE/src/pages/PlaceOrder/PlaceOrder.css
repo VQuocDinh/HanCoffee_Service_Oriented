@@ -1,4 +1,4 @@
-.order {
+.place-order {
     /* margin-top: 150px; */
     display: flex;
     gap: 80px;
@@ -55,9 +55,14 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    box-shadow: 0 0 20px #ccc;
     border-radius: 2px;
 
+}
+
+
+.order__right > h2 {
+    margin-top: auto
+    ;
 }
 
 .order__right-product {
@@ -84,15 +89,25 @@
 .order__right-product-list-item {}
 
 .order__right-price {
-    margin-top: auto;
-    padding: 8px;
+    margin-top: 20px;
+    padding-bottom: 4px;
+    /* padding: 8px; */
 
 }
 
-.order__right-price-delivery {}
+.order__right-price-delivery hr {
+    margin: 10px 0;
+}
+.order__total {
+    display: flex;
+}
+
+.total {
+    margin-left: auto;
+}
 
 .order__right-total {
-    margin-top: auto;
+    margin-top: 20px;
     padding: 8px;
     display: flex;
     background-color: var(--primary-color);

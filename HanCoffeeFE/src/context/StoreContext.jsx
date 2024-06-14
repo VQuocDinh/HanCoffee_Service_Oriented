@@ -9,7 +9,7 @@ const StoreContextProvider = (props) => {
     const [category_list, setCategoryList] = useState([]);
     const [cartItems, setCartItems] = useState({});
     const [itemTotal,setItemTotal] = useState(0)
-    const [token, setToken] = useState(localStorage.getItem("token") || "");
+    const [token, setToken] = useState("");
 
     const fetchProductList = async () => {
         try {
@@ -108,13 +108,17 @@ const StoreContextProvider = (props) => {
         const loadData = async () => {
             await fetchProductList();
             await fetchCategoryList();
-            await loadCartData();
+            if(localStorage.getItem("token")){
+                setToken(localStorage.getItem("token"))
+                await loadCartData(localStorage.getItem("token"));
+            }
+            
         };
         loadData();
-    }, [token]);
+    }, []);
 
     useEffect(() => {
-        setItemTotal(Object.values(cartItems).reduce((acc, count) => acc + count, 0));
+        setItemTotal(Object.values(cartItems || {}).reduce((acc, count) => acc + count, 0));
     }, [cartItems]);
 
     const contextValue = {

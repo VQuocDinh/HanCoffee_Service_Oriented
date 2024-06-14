@@ -41,16 +41,20 @@ const Customer = () => {
                 {customerList.map((customer) => (
                     <div key={customer._id} className="customer-table-row">
                         <div>{customer.email}</div>
-                        <div>{customer.phone}</div>
+                        <div>{customer.phone || 'Chưa cập nhật'}</div>
                         <div>
                             {new Date(customer.createdAt).toLocaleDateString()}
                         </div>
                         <div>
-                            <img
-                                className="customer-img"
-                                src={customer.image}
-                                alt={customer.username}
-                            />
+                            {customer.image ? (
+                                <img
+                                    className="customer-img"
+                                    src={customer.image}
+                                    alt={customer.username}
+                                />
+                            ) : (
+                                'Chưa cập nhật'
+                            )}
                         </div>
                         <div>User</div>
                     </div>

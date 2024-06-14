@@ -1,4 +1,3 @@
-import cartItemsModel from "../models/cartItemsModel.js"
 import userModel from "../models/userModel.js";
 
 
@@ -6,9 +5,13 @@ import userModel from "../models/userModel.js";
 const addToCart = async(req,res) => {
     try {
         let userData = await userModel.findOne({_id:req.body.userId})
-        let cartData = await userData.cartData;
+        if (!userData) {
+           console.log("User not found" );
+        }
+
+        let cartData = await userData.cartData || {};
         if(!cartData[req.body.itemId]) {
-            cartData[req.body.itemId] = 1
+            cartData[req.body.itemId] = 1   
         }
         else{
             cartData[req.body.itemId] += 1;

@@ -41,16 +41,20 @@ const Staff = () => {
                 {staffList.map((staff) => (
                     <div key={staff._id} className="staff-table-row">
                         <div>{staff.email}</div>
-                        <div>{staff.phone}</div>
+                        <div>{staff.phone || 'Chưa cập nhật'}</div>
                         <div>
                             {new Date(staff.createdAt).toLocaleDateString()}
                         </div>
                         <div>
-                            <img
-                                className="staff-img"
-                                src={staff.image}
-                                alt={staff.username}
-                            />
+                            {staff.image ? (
+                                <img
+                                    className="staff-img"
+                                    src={staff.image}
+                                    alt={staff.username}
+                                />
+                            ) : (
+                                'Chưa cập nhật'
+                            )}
                         </div>
                         <div>Manager</div>
                     </div>

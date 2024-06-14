@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bgr_home"
     android:orientation="vertical"
-    tools:context=".Activity.User.HomeFragment">
+    tools:context=".Controller.Activity.User.HomeFragment">
 
 
     <LinearLayout
@@ -95,9 +95,7 @@
                         android:id="@+id/rvProduct"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false">
-
-                    </androidx.recyclerview.widget.RecyclerView>
+                        android:nestedScrollingEnabled="false"/>
                 </androidx.core.widget.NestedScrollView>
 
             </LinearLayout>

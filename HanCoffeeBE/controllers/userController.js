@@ -70,7 +70,7 @@ const authUser = async (req, res) => {
       // **Check if user object exists and role is defined and valid**
       if (user && user.role !== undefined && (user.role === 0 || user.role === 1 || user.role === 2)) {
         const token = jwt.sign({ id: user._id, role: user.role },process.env.JWT_SECRET);
-        res.json({ token, user: { id: user._id, email: user.email, role: user.role } });
+        res.json({ token, user: { _id: user._id, email: user.email, role: user.role } });
       } else {
         console.error('User role is undefined or invalid');
         res.status(400).json({ message: 'Invalid user role' });

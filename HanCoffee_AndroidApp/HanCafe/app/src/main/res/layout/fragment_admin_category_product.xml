@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="50dp"
     android:orientation="vertical"
-    tools:context=".Activity.Admin.CategoryProductAdminFragment">
+    tools:context=".Controller.Activity.Admin.CategoryProductAdminFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
@@ -23,7 +23,6 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="20dp"
         android:src="@drawable/baseline_add_24"
-        android:backgroundTint="#8B0305"
-        android:visibility="gone"/>
+        android:backgroundTint="#8B0305" />
 
 </LinearLayout>

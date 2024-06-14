@@ -1,4 +1,4 @@
-.customers-container {
+.users-container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -16,15 +16,15 @@ h1 {
     font-weight: bold;
 }
 
-.customers-table {
+.users-table {
     width: 100%;
     margin-top: 20px;
     border-collapse: collapse;
 }
 
-.customers-table-header {
+.users-table-header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1fr;
     gap: 10px;
     padding: 12px 15px;
     background-color: #343a40;
@@ -32,28 +32,28 @@ h1 {
     border-radius: 5px;
 }
 
-.customers-table-row {
+.users-table-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1fr;
     gap: 10px;
     padding: 12px 15px;
     border-bottom: 1px solid #ddd;
     align-items: center;
 }
 
-.customers-table-row img {
+.users-table-row img {
     width: 50px;
     height: 50px;
     object-fit: cover;
     border-radius: 50%;
 }
 
-.customers-table-row select {
+.users-table-row select {
     padding: 8px;
     border-radius: 5px;
 }
 
-.customers-table-row button {
+.users-table-row button {
     background-color: #8b0305;
     color: white;
     padding: 8px 16px;
@@ -63,6 +63,6 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-.customers-table-row button:hover {
+.users-table-row button:hover {
     background-color: #680707;
 }

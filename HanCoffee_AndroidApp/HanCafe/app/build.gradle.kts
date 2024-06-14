@@ -75,7 +75,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.11.0")
     implementation("androidx.activity:activity:1.8.0")
     implementation(fileTree(mapOf(
-        "dir" to "C:\\Users\\Admin\\Desktop\\HanCoffee_Service_Oriented\\HanCoffee_AndroidApp\\HanCafe\\PAYMENT",
+        "dir" to "D:\\hk2-nam4\\phat-trien-pm-huong-dv\\project\\HanCoffee_Service_Oriented\\HanCoffee_AndroidApp\\HanCafe\\PAYMENT",
         "include" to listOf("*.aar", "*.jar")
     )))
     implementation(libs.gson)
@@ -84,6 +84,8 @@ dependencies {
     implementation(libs.places)
     implementation(libs.play.services.places)
     implementation(libs.slf4j.api)
+    implementation(libs.firebase.appcheck)
+    implementation(libs.jbcrypt)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -96,5 +98,4 @@ dependencies {
     implementation("com.nineoldandroids:library:2.4.0")
     implementation("com.itextpdf:itext7-core:7.1.15")
     implementation("com.google.firebase:firebase-appcheck-safetynet:16.0.1")
-
 }

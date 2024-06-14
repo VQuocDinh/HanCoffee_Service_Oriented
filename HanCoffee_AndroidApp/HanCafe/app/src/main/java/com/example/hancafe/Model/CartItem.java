@@ -14,6 +14,7 @@ public class CartItem implements Serializable {
     public CartItem() {
     }
 
+
     public boolean isChecked() {
         return isChecked;
     }

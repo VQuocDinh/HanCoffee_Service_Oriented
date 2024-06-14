@@ -16,10 +16,6 @@ const userSchema = new mongoose.Schema({
         enum: [0, 1, 2],
         default: 2,
     },
-    cartdata: {
-        type: Object,
-        default: {},
-    },
     name: {
         type: String,
         default: '',
@@ -32,7 +28,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: '',
     },
-    AI: {
+    avatar: {
         type: String,
         default: '',
     },
