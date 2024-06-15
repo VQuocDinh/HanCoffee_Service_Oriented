@@ -84,10 +84,10 @@ export const router = createBrowserRouter([
                 ],
             },
             {
-                path: PATH_CUSTOMER.general.productDetail.root,
+                path: PATH_CUSTOMER.general.product.root,
                 children: [
                     {
-                        path: PATH_CUSTOMER.general.productDetail.root,
+                        path: PATH_CUSTOMER.general.product.root,
                         element: <ProductDetail />,
                     },
                 ],

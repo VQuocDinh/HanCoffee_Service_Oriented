@@ -8,10 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import './Product.scss'
 import Modal from 'react-modal';
 
-const Product = ({category}) => {
+const Product = ({ category }) => {
   // declare hook need to be used
   const navigate = useNavigate();
-  const { product_list, addToCart } = useContext(StoreContext)
+  const { product_list, addToCart, searchQuery } = useContext(StoreContext)
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [showModal, setShowModal] = useState(false)
 
@@ -33,8 +33,20 @@ const Product = ({category}) => {
       handleClose();
       notifyError();
     }
-};
+  };
 
+
+
+const normalizeString = (str) => {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove accents
+    .toLowerCase();
+};
+  // filter product from search
+  const filteredProducts = product_list.filter(item =>
+    normalizeString(item.name).includes(normalizeString(searchQuery))
+  );
   const notifySuccess = () => {
     toast.success("Add to cart successfully", {
       position: "top-right",
@@ -69,11 +81,11 @@ const Product = ({category}) => {
       <h1 className='product__heading'>reach for your favorite beverage</h1>
 
       <div className="product__list">
-        {product_list.map((item, index) => {
-          if (category ==="All" || category === item.idCategory){
+        {filteredProducts.map((item, index) => {
+          if (category === "All" || category === item.idCategory) {
             return (
 
-              <div onClick={() => navigate('/productDetail')} className="product__list-item">
+              <div onClick={() => navigate(`/product/${item._id}`)} className="product__list-item">
                 <img src={item.image} alt="" className="item-img" />
                 <div className="item__content">
                   <div className="item__content-name">
@@ -86,18 +98,18 @@ const Product = ({category}) => {
                       {item.price} VND
                     </span>
                   </div>
-  
-  
+
+
                 </div>
-  
+
                 <div onClick={(event) => handleOpen(item, event)} className="item__content-add-cart">
                   <FontAwesomeIcon icon={faPlusCircle} />
-  
+
                 </div>
               </div>
             )
           }
-          
+
         })}
       </div>
       <ToastContainer />

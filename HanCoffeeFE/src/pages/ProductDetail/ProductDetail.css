@@ -1,15 +1,15 @@
-.product__detail {
-    
-
-}
+.product__detail {}
 
 .product__detail-name {
     margin-bottom: 20px;
+    text-align: start;
 }
+
+
 
 .product__detail-body {
     display: flex;
-    gap: 80px;
+    gap: 40px;
 
 }
 
@@ -29,7 +29,8 @@
 .product__detail-img>img {
     width: 400px;
     border-radius: 2px;
-
+    height: 500px;
+    object-fit: cover;
 }
 
 .product__detail-content {

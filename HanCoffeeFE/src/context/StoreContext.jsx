@@ -8,8 +8,9 @@ const StoreContextProvider = (props) => {
     const [product_list, setProductList] = useState([]);
     const [category_list, setCategoryList] = useState([]);
     const [cartItems, setCartItems] = useState({});
-    const [itemTotal,setItemTotal] = useState(0)
+    const [itemTotal, setItemTotal] = useState(0)
     const [token, setToken] = useState("");
+    const [searchQuery, setSearchQuery] = useState('')
 
     const fetchProductList = async () => {
         try {
@@ -28,7 +29,11 @@ const StoreContextProvider = (props) => {
     const fetchCategoryList = async () => {
         try {
             const categoryResponse = await axios.get(`${url}/api/category/list`);
-            setCategoryList(categoryResponse.data.data);
+            if (categoryResponse.data.success) {
+                const filterCategoryList = categoryResponse.data.data.filter(item => item.status === 0)
+                setCategoryList(filterCategoryList);
+
+            }
         } catch (error) {
             console.error('Error fetching category list: ', error);
         }
@@ -93,26 +98,26 @@ const StoreContextProvider = (props) => {
         }
     };
 
-    const getTotalCartAmout = ()=>{
+    const getTotalCartAmout = () => {
         let totalAmout = 0
-        for( const item in cartItems ) {
-            if (cartItems[item] > 0 ){
-                let itemInfor = product_list.find((product)=> product._id === item)
+        for (const item in cartItems) {
+            if (cartItems[item] > 0) {
+                let itemInfor = product_list.find((product) => product._id === item)
                 totalAmout += itemInfor.price * cartItems[item]
             }
         }
-    
+
         return totalAmout
     }
     useEffect(() => {
         const loadData = async () => {
             await fetchProductList();
             await fetchCategoryList();
-            if(localStorage.getItem("token")){
+            if (localStorage.getItem("token")) {
                 setToken(localStorage.getItem("token"))
                 await loadCartData(localStorage.getItem("token"));
             }
-            
+
         };
         loadData();
     }, []);
@@ -131,7 +136,9 @@ const StoreContextProvider = (props) => {
         token,
         setToken,
         itemTotal,
-        getTotalCartAmout
+        getTotalCartAmout,
+        searchQuery,
+        setSearchQuery
     };
 
     return (

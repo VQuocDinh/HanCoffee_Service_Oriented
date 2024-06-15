@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import './Navbar.css'
 import { assets } from '../../../assets/assets'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,18 +7,31 @@ import { useNavigate } from 'react-router-dom'
 import { StoreContext } from '../../../context/StoreContext'
 
 const Navbar = () => {
-    const [menu, setMenu] = useState('home')
-    // const [isAuthenticated, setIsAuthenticated] = useState(false)
     const navigate = useNavigate()
-    const { token, setToken, itemTotal } = useContext(StoreContext)
-    const logout = ()=> {
+    const { productRef } = useRef(null)
+    const [menu, setMenu] = useState('home')
+    const { token, setToken, itemTotal, setSearchQuery: setSearchQueryGlobal } = useContext(StoreContext)
+    const [searchQuery, setSearchQuery] = useState("")
+
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value)
+        setSearchQueryGlobal(event.target.value)
+    }
+    console.log(searchQuery)
+    const logout = () => {
         localStorage.removeItem("token")
         setToken("")
         navigate('/')
     }
-    const { cartItems } = useContext(StoreContext)
-    // const totalCartItems = Object.values(cartItems).reduce((acc, count) => acc + count, 0);
-    // console.log('totalCartItems: ', totalCartItems)
+
+    const handleSearchSubmit = (event) => {
+        event.preventDefault();
+        const productElement = document.getElementById('product');
+        if (productElement) {
+            productElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
 
     return (
         <div className="navbar__customer">
@@ -65,11 +78,15 @@ const Navbar = () => {
 
                     {/* navbar search */}
                     <div className="navbav__right-search">
-                        <input
-                            type="text"
-                            className="search__input"
-                            placeholder="Tìm sản phẩm"
-                        />
+                        <form onSubmit={handleSearchSubmit}>
+                            <input
+                                type="text"
+                                className="search__input"
+                                placeholder="Tìm sản phẩm"
+                                value={searchQuery}
+                                onChange={handleSearchChange}
+                            />
+                        </form>
                         <div className="search__history">
                             <h3 class="search__history-heading">
                                 Lịch sử tìm kiếm
@@ -83,13 +100,13 @@ const Navbar = () => {
                                 </li>
                             </ul>
                         </div>
-                        <i className="search__icon">
+                        <a href="#product" className="search__icon">
                             <FontAwesomeIcon icon={faSearch} />
-                        </i>
+                        </a>
                     </div>
 
                     {/* navbar cart */}
-                    <a onClick={()=> navigate('/cart')} className="navbav__right-cart">
+                    <a onClick={() => navigate('/cart')} className="navbav__right-cart">
                         <i className="cart__icon">
                             <FontAwesomeIcon icon={faCartShopping} />
                         </i>

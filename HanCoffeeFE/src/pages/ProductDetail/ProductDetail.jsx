@@ -1,19 +1,31 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './ProductDetail.css'
 import { assets } from '../../assets/assets'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { StoreContext } from '../../context/StoreContext'
 
 const ProductDetail = () => {
   const navigate = useNavigate();
+  const {product_list} = useContext(StoreContext)
+  const {productId} = useParams()
+  const [product,setProduct] = useState(null)
+  useEffect(()=>{
+    const selectedProduct = product_list.find(item => item._id === productId)
+    setProduct(selectedProduct)
+  },[productId, product_list])
+  
+  if(!product){
+    return <div>Loading...</div>;
+  }
   return (
     <div className='product__detail'>
-      <div className="product__detail-name">
-        <h1>Capuchino</h1>
+      <div>
+        <h1  className="product__detail-name">{product.name}</h1>
       </div>
 
       <div className="product__detail-body">
         <div className="product__detail-img">
-          <img src={assets.productImg} alt="" />
+          <img src={product.image} alt="" />
 
         </div>
         <div className="product__detail-contain">
@@ -22,7 +34,7 @@ const ProductDetail = () => {
 
 
             <div className="product__detail-content-desc">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur sint repudiandae, asperiores nobis veritatis autem omnis fugiat id quo, eum consectetur ex quis necessitatibus accusantium. Asperiores libero sapiente iste architecto.</p>
+              <p>{product.description}</p>
             </div>
 
             <div className="product__detail-content-size">
@@ -36,7 +48,7 @@ const ProductDetail = () => {
 
             <div className="product__detail-content-price">
               <span>Giá: </span>
-              <div className="price__product">$2</div>
+              <div className="price__product">{product.price} VND</div>
             </div>
 
 

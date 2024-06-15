@@ -57,8 +57,8 @@ export const PATH_CUSTOMER = {
         cart: {
             root: path(ROOT_CUSTOMER, 'cart'),
         },
-        productDetail: {
-            root: path(ROOT_CUSTOMER, 'productDetail'),
+        product: {
+            root: path(ROOT_CUSTOMER, 'product/:productId'),
         },
         placeOrder: {
             root: path(ROOT_CUSTOMER, 'placeOrder'),
